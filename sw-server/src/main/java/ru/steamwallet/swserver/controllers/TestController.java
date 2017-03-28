@@ -1,4 +1,4 @@
-package ru.streamwallet.swserver.controllers;
+package ru.steamwallet.swserver.controllers;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

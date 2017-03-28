@@ -14,6 +14,12 @@
 
     <dependencies>
         <dependency>
+            <groupId>${ed.group}</groupId>
+            <version>${ed.version}</version>
+            <artifactId>sw-common</artifactId>
+        </dependency>
+
+        <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-webmvc</artifactId>
             <version>${spring.version}</version>

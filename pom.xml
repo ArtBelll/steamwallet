@@ -17,10 +17,26 @@
         <ed.group>${project.groupId}</ed.group>
         <ed.version>${project.version}</ed.version>
 
-        <spring.version>4.3.7.RELEASE</spring.version>
-
         <maven.compiler.source>1.8</maven.compiler.source>
         <maven.compiler.target>1.8</maven.compiler.target>
+
+        <spring.version>4.3.7.RELEASE</spring.version>
+        <postgresql.version>9.4.1212</postgresql.version>
+        <hikari.version>2.5.1</hikari.version>
+        <hibernate.version>4.3.11.Final</hibernate.version>
+
+        <!-- Logging -->
+        <slf4j.version>1.7.12</slf4j.version>
+        <log4j.version>2.4.1</log4j.version>
+
+        <!-- JSON -->
+        <jackson.version>2.7.6</jackson.version>
+
+        <!-- Tests -->
+        <junit.version>4.11</junit.version>
+        <mockito.version>2.2.8</mockito.version>
+
+        <lombok.version>1.16.10</lombok.version>
     </properties>
 
 </project>
