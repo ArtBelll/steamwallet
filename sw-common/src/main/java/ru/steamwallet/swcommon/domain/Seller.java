@@ -5,6 +5,7 @@ import lombok.Setter;
 
 import javax.persistence.*;
 import java.util.Date;
+import java.util.List;
 
 /**
  * Created by Artur Belogur on 28.03.17.
@@ -36,4 +37,10 @@ public class Seller {
 
     @Getter @Setter
     private boolean enable = true;
+
+    @Getter @Setter
+    @OneToMany(mappedBy = "seller")
+    private List<Purchase> purchases;
+
+    public Seller() {}
 }

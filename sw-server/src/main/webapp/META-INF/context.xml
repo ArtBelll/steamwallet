@@ -1,0 +1,20 @@
+<Context>
+    <Resource
+            name="jdbc/swserver"
+            auth="Container"
+            type="javax.sql.DataSource"
+            username="swserver"
+            password="qweqwe"
+            driverClassName="org.postgresql.Driver"
+            url="jdbc:postgresql://localhost:5432/swserver"
+            testOnBorrow="true"
+            validationQuery="select 1;"
+            />
+
+</Context>
+
+<!--
+It's kind of magic here, but with this standard line you cannot deploy application on Mac OS X
+with java.sql.SQLException: org.postgresql.Driver in org.apache.tomcat.jdbc.pool.PooledConnection.connectUsingDriver.
+factory="org.apache.tomcat.jdbc.pool.DataSourceFactory"
+-->
