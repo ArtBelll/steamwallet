@@ -1,9 +1,12 @@
 package ru.steamwallet.swcommon.domain;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 
@@ -12,7 +15,7 @@ import java.util.List;
  */
 @Entity
 @Table(name = "sellers")
-public class Seller {
+public class Seller implements Serializable {
 
     @Getter @Setter
     @Id
@@ -23,7 +26,13 @@ public class Seller {
     private String name;
 
     @Getter @Setter
-    private Float reaction;
+    private String password;
+
+    @Getter @Setter
+    private String email;
+
+    @Getter @Setter
+    private Float reaction = -1f;
 
     @Getter @Setter
     private Date created = new Date();
@@ -43,4 +52,13 @@ public class Seller {
     private List<Purchase> purchases;
 
     public Seller() {}
+
+    @JsonCreator
+    public Seller(@JsonProperty("name") String name,
+                  @JsonProperty("email") String email,
+                  @JsonProperty("password") String password) {
+        this.name = name;
+        this.email = email;
+        this.password = password;
+    }
 }

@@ -2,6 +2,7 @@ package ru.steamwallet.swcommon.dao.dbimpl;
 
 import lombok.NonNull;
 import org.hibernate.Query;
+import org.springframework.stereotype.Repository;
 import ru.steamwallet.swcommon.dao.BuyerDao;
 import ru.steamwallet.swcommon.domain.Buyer;
 
@@ -10,6 +11,7 @@ import java.util.List;
 /**
  * Created by Artur Belogur on 29.03.17.
  */
+@Repository(value = "buyerDao")
 public class BuyerDaoImpl extends SessionFactoryHolder implements BuyerDao {
 
     @Override
