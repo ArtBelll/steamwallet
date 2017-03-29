@@ -1,6 +1,8 @@
 package ru.steamwallet.swserver.http;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import lombok.Getter;
+import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -16,8 +18,6 @@ import ru.steamwallet.swcommon.exceptions.BadRequest;
 import ru.steamwallet.swcommon.exceptions.ResourceNotFoundException;
 import ru.steamwallet.swcommon.exceptions.UnAuthorized;
 
-import java.io.FileNotFoundException;
-
 /**
  * Created by Sergey Ignatov on 24/02/16.
  */
@@ -27,55 +27,27 @@ public class RestExceptionHandler extends ResponseEntityExceptionHandler {
 
     @JsonIgnoreProperties(ignoreUnknown = true)
     class Error {
+        @Getter @Setter
         private int code;
+        @Getter @Setter
         private String message;
 
         public Error(int code, final String message) {
             this.code = code;
             this.message = message;
         }
-
-        public int getCode() {
-            return code;
-        }
-
-        public void setCode(int code) {
-            this.code = code;
-        }
-
-        public String getMessage() {
-            return message;
-        }
-
-        public void setMessage(String message) {
-            this.message = message;
-        }
     }
 
     @JsonIgnoreProperties(ignoreUnknown = true)
     class ErrorResponse {
+        @Getter @Setter
         private Error error;
+        @Getter @Setter
         private String status;
 
         public ErrorResponse(final Error error, final String status) {
             this.error = error;
             this.status = status;
-        }
-
-        public String getStatus() {
-            return status;
-        }
-
-        public void setStatus(String status) {
-            this.status = status;
-        }
-
-        public Error getError() {
-            return error;
-        }
-
-        public void setError(Error error) {
-            this.error = error;
         }
     }
 
