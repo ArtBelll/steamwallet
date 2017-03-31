@@ -1,7 +1,7 @@
 package ru.steamwallet.swcommon.domain;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
-import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -47,6 +47,7 @@ public class Seller implements Serializable {
     @Getter @Setter
     private boolean enable = true;
 
+    @JsonIgnore
     @Getter @Setter
     @OneToMany(mappedBy = "seller")
     private List<Purchase> purchases;
@@ -54,9 +55,7 @@ public class Seller implements Serializable {
     public Seller() {}
 
     @JsonCreator
-    public Seller(@JsonProperty("name") String name,
-                  @JsonProperty("email") String email,
-                  @JsonProperty("password") String password) {
+    public Seller(String name, String email, String password) {
         this.name = name;
         this.email = email;
         this.password = password;

@@ -46,13 +46,12 @@ public abstract class SessionController {
     protected String setSessionSeller(final @NonNull Seller seller) {
         final Map<String, Object> claims = new HashMap<>();
         claims.put(USER_ID, seller.getId());
-        final String payload = Jwts.builder()
+        return Jwts.builder()
                 .setSubject(seller.getName())
                 .setIssuedAt(new Date())
                 .setClaims(claims)
                 .signWith(SignatureAlgorithm.HS512, K64)
                 .compact();
-        return payload;
     }
 
     protected String setSessionBuyer(final @NonNull Buyer buyer) {
@@ -80,8 +79,8 @@ public abstract class SessionController {
                     .setSigningKey(K64)
                     .parseClaimsJws(payload)
                     .getBody();
-            final Long id = Optional.of((Long)claims.get(USER_ID)).orElseThrow(UnAuthorized::new);
-            final Seller seller = sellerDao.get(id);
+            final int id = Optional.of((int)claims.get(USER_ID)).orElseThrow(UnAuthorized::new);
+            final Seller seller = sellerDao.get((long)id);
             if (seller == null) {
                 throw new ResourceNotFoundException("user_id", id);
             }
@@ -144,47 +143,20 @@ public abstract class SessionController {
     }
 
     protected ResponseEntity<?> createdResponse(final Object data,
-                                                final Long dataId,
                                                 final boolean created,
                                                 final String jwt,
                                                 final boolean ssl) {
         final HttpHeaders headers = new HttpHeaders();
-        if (dataId != null) {
-            headers.setLocation(ServletUriComponentsBuilder
-                    .fromCurrentRequest().path("/{id}").buildAndExpand(dataId).toUri());
-        }
         if (jwt != null && !"".equals(jwt))
             setJwtToken(headers, jwt, ssl);
         return new ResponseEntity<>(data, headers, created ? HttpStatus.CREATED : HttpStatus.OK);
     }
 
-    private void setJwtToken(final HttpHeaders headers, final String jwt, boolean ssl) {
-        headers.add(HttpHeaders.SET_COOKIE, TOKEN_HEADER + "=" + jwt +
-                "; Max-Age=" + Integer.toString(60 * 60 * 24 * 365) + // expires in 1 year.
-                (ssl ? "; Secure" : "; HttpOnly"));
-    }
-
-    protected ResponseEntity<?> createdResponse(final Object data,
-                                                final long dataId,
-                                                final boolean created) {
-        final HttpHeaders headers = new HttpHeaders();
-        headers.setLocation(ServletUriComponentsBuilder
-                .fromCurrentRequest().path("/{id}").buildAndExpand(dataId).toUri());
-        return new ResponseEntity<>(data, headers, created ? HttpStatus.CREATED : HttpStatus.OK);
-    }
-
-    protected ResponseEntity<?> createdResponse(final Object data, final long dataId) {
-        return createdResponse(data, dataId, true);
-    }
-
-    protected ResponseEntity<?> createdResponse(final String path,
-                                                final Object data,
-                                                final UUID dataId,
-                                                final boolean created) {
-        final HttpHeaders headers = new HttpHeaders();
-        final ServletUriComponentsBuilder builder = ServletUriComponentsBuilder.fromCurrentServletMapping();
-        headers.setLocation(builder.path(path).buildAndExpand(dataId).toUri());
-        return new ResponseEntity<>(data, headers, created ? HttpStatus.CREATED : HttpStatus.OK);
+    private void setJwtToken(final HttpHeaders headers, final String jwt, final boolean ssl) {
+        headers.add(HttpHeaders.SET_COOKIE,
+                TOKEN_HEADER + "=" + jwt +
+                (ssl ? "; Secure" : "; HttpOnly") +
+                "; Path=/api/v1");
     }
 
     protected static boolean isSslRequest(final @NotNull HttpServletRequest request) {
