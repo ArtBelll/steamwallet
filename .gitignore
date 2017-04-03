@@ -2,3 +2,7 @@ target/
 out/
 .idea/
 *.iml
+*.map
+node_modules/
+.sass-cache/
+src/app/
