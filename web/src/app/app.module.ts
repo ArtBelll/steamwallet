@@ -8,6 +8,7 @@ import {NavigationComponent} from "./components/navigation/nav.component";
 import {AuthSellerService} from "./services/auth-seller-service";
 import {SignUpComponent} from "./components/registration/sign-up.component";
 import {SignInComponent} from "./components/login/sign-in.component";
+import {NotAuthGuard} from "./services/not-auth-guard-service";
 
 @NgModule({
     imports: [
@@ -22,7 +23,10 @@ import {SignInComponent} from "./components/login/sign-in.component";
         SignUpComponent,
         SignInComponent
     ],
-    providers: [AuthSellerService],
+    providers: [
+      AuthSellerService,
+      NotAuthGuard
+    ],
     bootstrap: [AppComponent]
 })
 export class AppModule {

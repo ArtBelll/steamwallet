@@ -1,5 +1,6 @@
 import {Component} from '@angular/core';
 import {SellerRequest} from "../../domain/request/sellerRequest";
+import { Location }                 from '@angular/common';
 
 import {AuthSellerService} from "../../services/auth-seller-service"
 
@@ -11,13 +12,19 @@ import {AuthSellerService} from "../../services/auth-seller-service"
 
 export class SignInComponent {
 
-  constructor(private authSellerService:AuthSellerService) {
+  constructor(
+    private authSellerService:AuthSellerService,
+    private location: Location,
+  ) {
   }
 
   seller: SellerRequest = new SellerRequest();
 
   signIn():void {
     this.authSellerService.signIn(this.seller)
-      .then(seller => console.log(seller));
+      .then(seller => {
+        console.log(seller);
+        this.location.back();
+      });
   }
 }

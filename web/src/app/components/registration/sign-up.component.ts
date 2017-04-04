@@ -20,14 +20,4 @@ export class SignUpComponent {
     this.authSellerService.register(this.seller)
       .then(seller => console.log(seller));
   }
-
-  getCurrentSeller():void {
-    this.authSellerService.getCurrentSeller()
-      .then(seller => console.log(seller));
-  }
-
-  logOut():void {
-    this.authSellerService.logOut()
-      .then();
-  }
 }

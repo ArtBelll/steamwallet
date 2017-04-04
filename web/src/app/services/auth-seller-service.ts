@@ -1,10 +1,12 @@
 import { Injectable } from '@angular/core';
 import { Headers, Http}  from "@angular/http";
 
+import 'rxjs/add/operator/map'
 import 'rxjs/add/operator/toPromise';
 
 import {Seller} from '../domain/seller';
 import {SellerRequest} from '../domain/request/sellerRequest';
+import {Observable} from "rxjs/Rx";
 
 @Injectable()
 export class AuthSellerService {
@@ -13,6 +15,8 @@ export class AuthSellerService {
     private urlLogin = 'api/v1/auth/seller/login';
     private urlCurrentSeller = 'api/v1/seller/session';
     private urlLogout = 'api/v1/auth/seller/logout';
+
+    private isLoggedIn = false;
 
     private headers = new Headers({'Content-Type': 'application/json'});
 
@@ -35,8 +39,18 @@ export class AuthSellerService {
       return this.http
         .get(this.urlCurrentSeller, {headers: this.headers})
         .toPromise()
-        .then(response => response.json() as Seller)
+        .then(response => {
+          this.isLoggedIn = true;
+          return response.json() as Seller
+        })
         .catch(this.handleError)
+    }
+
+    checkLogin(): Promise<boolean> {
+      return this.http
+        .get(this.urlCurrentSeller, {headers: this.headers})
+        .map(response => response.ok)
+        .toPromise()
     }
 
     signIn(sellerRequest: SellerRequest): Promise<Seller> {
@@ -51,6 +65,7 @@ export class AuthSellerService {
       return this.http
         .get(this.urlLogout, {headers: this.headers})
         .toPromise()
+        .then(response => this.isLoggedIn = false)
         .catch(this.handleError)
     }
 }
