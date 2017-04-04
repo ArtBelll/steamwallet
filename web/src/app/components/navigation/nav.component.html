@@ -1,4 +1,4 @@
-<div class="navbar navbar-default navbar-fixed-top">
+<div class="navbar navbar-default">
   <div class="container">
     <div class="navbar-header">
       <a href="../" class="navbar-brand">Название</a>
@@ -18,11 +18,12 @@
         </li>
       </ul>
 
-      <ul class="nav navbar-nav navbar-right">
-        <li><a href="http://builtwithbootstrap.com/" target="_blank">Войти</a></li>
-        <li><a href="https://wrapbootstrap.com/?ref=bsw" target="_blank">Зарегистрироваться</a></li>
-      </ul>
-
+      <div *ngIf="userIsAuth">
+        <ul class="nav navbar-nav navbar-right">
+          <li><a href="http://builtwithbootstrap.com/">Войти</a></li>
+          <li><a href="sign-up/">Регистрация</a></li>
+        </ul>
+      </div>
     </div>
   </div>
 </div>
