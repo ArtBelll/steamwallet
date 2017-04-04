@@ -19,7 +19,7 @@ public class Buyer {
     private long id = -1;
 
     @Getter @Setter
-    private String name;
+    private String login;
 
     @Getter @Setter
     @OneToMany(mappedBy = "buyer")

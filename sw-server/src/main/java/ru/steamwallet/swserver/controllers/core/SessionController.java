@@ -47,7 +47,7 @@ public abstract class SessionController {
         final Map<String, Object> claims = new HashMap<>();
         claims.put(USER_ID, seller.getId());
         return Jwts.builder()
-                .setSubject(seller.getName())
+                .setSubject(seller.getLogin())
                 .setIssuedAt(new Date())
                 .setClaims(claims)
                 .signWith(SignatureAlgorithm.HS512, K64)
@@ -58,7 +58,7 @@ public abstract class SessionController {
         final Map<String, Object> claims = new HashMap<>();
         claims.put(USER_ID, buyer.getId());
         final String payload = Jwts.builder()
-                .setSubject(buyer.getName())
+                .setSubject(buyer.getLogin())
                 .setIssuedAt(new Date())
                 .setClaims(claims)
                 .signWith(SignatureAlgorithm.HS512, K64)

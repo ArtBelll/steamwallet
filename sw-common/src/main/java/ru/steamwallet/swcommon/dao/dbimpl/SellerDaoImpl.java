@@ -29,7 +29,7 @@ public class SellerDaoImpl extends SessionFactoryHolder implements SellerDao {
 
     @Override
     public Seller getByName(@NonNull String name) {
-        Query query = getSession().createQuery("from Seller u where u.name=:name");
+        Query query = getSession().createQuery("from Seller u where u.login=:name");
         query.setParameter("name", name);
         List results = query.list();
         return !results.isEmpty() ? (Seller) results.get(0) : null;

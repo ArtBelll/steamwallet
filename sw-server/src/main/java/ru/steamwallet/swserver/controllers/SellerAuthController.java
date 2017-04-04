@@ -7,10 +7,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.StringUtils;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import ru.steamwallet.swcommon.domain.Seller;
 import ru.steamwallet.swcommon.exceptions.AlreadyRegistered;
 import ru.steamwallet.swcommon.exceptions.BadRequest;
@@ -50,9 +47,9 @@ public class SellerAuthController extends SessionController {
             throw new AlreadyRegistered("Email " + email + " is already used in system");
         }
 
-        final String name = sellerRequest.getName();
+        final String name = sellerRequest.getLogin();
         if(sellerDao.getByName(name) != null) {
-            log.error("Email registration with already used name: {}", name);
+            log.error("Email registration with already used login: {}", name);
             throw new AlreadyRegistered("Name " + name + " is already used in system");
         }
 
@@ -72,7 +69,7 @@ public class SellerAuthController extends SessionController {
                                          @RequestBody final SellerRequest sellerRequest) {
         final String ip = getRequestIp(request);
 
-        log.info("Login sellerRequest procedure from {}:{}", ip, sellerRequest.getName());
+        log.info("Login sellerRequest procedure from {}:{}", ip, sellerRequest.getLogin());
 
         if (StringUtils.isEmpty(sellerRequest.getEmail()) || StringUtils.isEmpty(sellerRequest.getPassword())) {
             throw new BadRequest("Missed one or more request fields");
@@ -101,7 +98,7 @@ public class SellerAuthController extends SessionController {
 
     static class SellerRequest implements Serializable {
         @Getter
-        private String name;
+        private String login;
 
         @Getter
         private String email;
@@ -110,10 +107,10 @@ public class SellerAuthController extends SessionController {
         private String password;
 
         @JsonCreator
-        public SellerRequest(@JsonProperty("name") String name,
+        public SellerRequest(@JsonProperty("name") String login,
                              @JsonProperty("email") String email,
                              @JsonProperty("password") String password) {
-            this.name = name;
+            this.login = login;
             this.email = email;
             this.password = password;
         }

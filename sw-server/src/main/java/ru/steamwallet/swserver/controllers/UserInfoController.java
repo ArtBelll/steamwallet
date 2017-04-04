@@ -18,7 +18,7 @@ import javax.servlet.http.HttpServletRequest;
 @Slf4j
 @Transactional
 @RestController
-public class CheckSessionController extends SessionController {
+public class UserInfoController extends SessionController {
 
     @RequestMapping(value = "seller/session", method = RequestMethod.GET)
     public ResponseEntity<?> getSellerInfo(final HttpServletRequest request) {

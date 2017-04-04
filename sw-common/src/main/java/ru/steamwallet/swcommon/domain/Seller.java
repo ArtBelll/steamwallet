@@ -23,7 +23,7 @@ public class Seller implements Serializable {
     private long id = -1;
 
     @Getter @Setter
-    private String name;
+    private String login;
 
     @Getter @Setter
     private String password;
@@ -55,8 +55,8 @@ public class Seller implements Serializable {
     public Seller() {}
 
     @JsonCreator
-    public Seller(String name, String email, String password) {
-        this.name = name;
+    public Seller(String login, String email, String password) {
+        this.login = login;
         this.email = email;
         this.password = password;
     }
