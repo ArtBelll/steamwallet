@@ -10,8 +10,9 @@ import {SellerRequest} from '../domain/request/sellerRequest';
 export class AuthSellerService {
 
     private urlRegister = 'api/v1/auth/seller/register';
-    private urlLogin = 'localhost:8080/api/v1/auth/seller/login';
+    private urlLogin = 'api/v1/auth/seller/login';
     private urlCurrentSeller = 'api/v1/seller/session';
+    private urlLogout = 'api/v1/auth/seller/logout';
 
     private headers = new Headers({'Content-Type': 'application/json'});
 
@@ -35,6 +36,13 @@ export class AuthSellerService {
         .get(this.urlCurrentSeller, {headers: this.headers})
         .toPromise()
         .then(response => response.json() as Seller)
+        .catch(this.handleError)
+    }
+
+    logOut(): Promise<any> {
+      return this.http
+        .get(this.urlLogout, {headers: this.headers})
+        .toPromise()
         .catch(this.handleError)
     }
 }

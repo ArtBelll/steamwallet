@@ -147,16 +147,25 @@ public abstract class SessionController {
                                                 final String jwt,
                                                 final boolean ssl) {
         final HttpHeaders headers = new HttpHeaders();
-        if (jwt != null && !"".equals(jwt))
-            setJwtToken(headers, jwt, ssl);
+        if (jwt != null && !"".equals(jwt)) {
+            int expire = 60 * 60 * 24 * 365;
+            setJwtToken(headers, jwt, ssl, expire);
+        }
         return new ResponseEntity<>(data, headers, created ? HttpStatus.CREATED : HttpStatus.OK);
     }
 
-    private void setJwtToken(final HttpHeaders headers, final String jwt, final boolean ssl) {
+    private void setJwtToken(final HttpHeaders headers, final String jwt, final boolean ssl, int expire) {
         headers.add(HttpHeaders.SET_COOKIE,
                 TOKEN_HEADER + "=" + jwt +
+                "; Max-Age=" + Integer.toString(expire) +
                 (ssl ? "; Secure" : "; HttpOnly") +
                 "; Path=/api/v1");
+    }
+
+    protected ResponseEntity<?> closeSession() {
+        final HttpHeaders headers = new HttpHeaders();
+        setJwtToken(headers, "", false, 1);
+        return new ResponseEntity<>(headers, HttpStatus.OK);
     }
 
     protected static boolean isSslRequest(final @NotNull HttpServletRequest request) {

@@ -96,6 +96,16 @@ public class SellerAuthController extends SessionController {
         return createdResponse(seller, false, jwt, isSslRequest(request));
     }
 
+    @RequestMapping(value = "auth/seller/logout", method = RequestMethod.GET)
+    public ResponseEntity<?> logoutSeller(final HttpServletRequest request) {
+        final String ip = getRequestIp(request);
+
+        log.info("Logout sellerRequest procedure from {}", ip);
+        final Seller seller = getSessionSeller(request);
+
+        return closeSession();
+    }
+
     static class SellerRequest implements Serializable {
         @Getter
         private String login;

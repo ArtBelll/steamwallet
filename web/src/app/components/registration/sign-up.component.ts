@@ -25,4 +25,9 @@ export class SignUpComponent {
     this.authSellerService.getCurrentSeller()
       .then(seller => console.log(seller));
   }
+
+  logOut():void {
+    this.authSellerService.logOut()
+      .then();
+  }
 }
