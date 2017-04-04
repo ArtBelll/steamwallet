@@ -1,17 +1,19 @@
-<div class="form">
-  <div class="form-group">
-    <label for="login">Логин:</label>
-    <input [(ngModel)]="seller.login" type="text" class="form-control" id="login" placeholder="Логин">
+<div class="col-md-12">
+  <div class="form">
+    <div class="form-group">
+      <label for="login">Логин:</label>
+      <input [(ngModel)]="seller.login" type="text" class="form-control" id="login" placeholder="Логин">
+    </div>
+    <div class="form-group">
+      <label for="email">Email адрес:</label>
+      <input [(ngModel)]="seller.email" type="email" class="form-control" id="email" placeholder="email">
+    </div>
+    <div class="form-group">
+      <label for="pwd">Пароль:</label>
+      <input [(ngModel)]="seller.password" type="password" class="form-control" id="pwd" placeholder="Пароль">
+    </div>
+    <button (click)="singUp()" class="btn btn-default">Отправить</button>
+    <button (click)="getCurrentSeller()" class="btn btn-default">Проверить сессию</button>
+    <button (click)="logOut()" class="btn btn-default">Удалить сессию</button>
   </div>
-  <div class="form-group">
-    <label for="email">Email address:</label>
-    <input [(ngModel)]="seller.email" type="email" class="form-control" id="email" placeholder="email">
-  </div>
-  <div class="form-group">
-    <label for="pwd">Password:</label>
-    <input [(ngModel)]="seller.password" type="password" class="form-control" id="pwd" placeholder="Пароль">
-  </div>
-  <button (click)="singUp()" class="btn btn-default">Отправить</button>
-  <button (click)="getCurrentSeller()" class="btn btn-default">Проверить сессию</button>
-  <button (click)="logOut()" class="btn btn-default">Удалить сессию</button>
 </div>

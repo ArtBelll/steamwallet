@@ -13,10 +13,7 @@ import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
-import ru.steamwallet.swcommon.exceptions.AlreadyRegistered;
-import ru.steamwallet.swcommon.exceptions.BadRequest;
-import ru.steamwallet.swcommon.exceptions.ResourceNotFoundException;
-import ru.steamwallet.swcommon.exceptions.UnAuthorized;
+import ru.steamwallet.swcommon.exceptions.*;
 
 /**
  * Created by Sergey Ignatov on 24/02/16.
@@ -118,5 +115,17 @@ public class RestExceptionHandler extends ResponseEntityExceptionHandler {
         );
 
         return handleExceptionInternal(ex, error, headers, HttpStatus.BAD_REQUEST, request);
+    }
+
+    @ExceptionHandler({UserNotExists.class})
+    protected ResponseEntity<Object> handleUserNotExists(UserNotExists ex, WebRequest request) {
+        HttpHeaders headers = jsonHeaders();
+
+        ErrorResponse error = new ErrorResponse(
+                new Error(404, "User not found"),
+                "ERR"
+        );
+
+        return handleExceptionInternal(ex, error, headers, HttpStatus.NOT_FOUND, request);
     }
 }

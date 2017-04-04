@@ -39,6 +39,14 @@ export class AuthSellerService {
         .catch(this.handleError)
     }
 
+    signIn(sellerRequest: SellerRequest): Promise<Seller> {
+      return this.http
+        .post(this.urlLogin, JSON.stringify(sellerRequest) ,{headers: this.headers})
+        .toPromise()
+        .then(response => response.json() as Seller)
+        .catch(this.handleError)
+    }
+
     logOut(): Promise<any> {
       return this.http
         .get(this.urlLogout, {headers: this.headers})

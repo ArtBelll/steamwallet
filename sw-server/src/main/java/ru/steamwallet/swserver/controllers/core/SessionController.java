@@ -159,7 +159,7 @@ public abstract class SessionController {
                 TOKEN_HEADER + "=" + jwt +
                 "; Max-Age=" + Integer.toString(expire) +
                 (ssl ? "; Secure" : "; HttpOnly") +
-                "; Path=/api/v1");
+                "; Path=/api/v1/");
     }
 
     protected ResponseEntity<?> closeSession() {

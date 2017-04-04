@@ -7,6 +7,7 @@ import {AppRoutingModule} from "./app-routing.module";
 import {NavigationComponent} from "./components/navigation/nav.component";
 import {AuthSellerService} from "./services/auth-seller-service";
 import {SignUpComponent} from "./components/registration/sign-up.component";
+import {SignInComponent} from "./components/login/sign-in.component";
 
 @NgModule({
     imports: [
@@ -18,7 +19,8 @@ import {SignUpComponent} from "./components/registration/sign-up.component";
     declarations: [
         AppComponent,
         NavigationComponent,
-        SignUpComponent
+        SignUpComponent,
+        SignInComponent
     ],
     providers: [AuthSellerService],
     bootstrap: [AppComponent]
