@@ -37,7 +37,7 @@ public class UserInfoController extends SessionController {
     @RequestMapping(value = "user/session", method = RequestMethod.GET)
     public ResponseEntity<?> checkSession(final HttpServletRequest request) {
         try {
-            final Seller seller = getSessionSeller(request);
+            getSessionSeller(request);
             return new ResponseEntity<>(HttpStatus.OK);
         }
         catch (UnAuthorized e) {
@@ -45,7 +45,7 @@ public class UserInfoController extends SessionController {
         }
 
         try {
-            final Buyer buyer = getSessionBuyer(request);
+            getSessionBuyer(request);
             return new ResponseEntity<>(HttpStatus.OK);
         }
         catch (UnAuthorized e) {
