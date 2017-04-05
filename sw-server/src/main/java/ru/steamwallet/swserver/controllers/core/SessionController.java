@@ -1,25 +1,27 @@
 package ru.steamwallet.swserver.controllers.core;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.sun.istack.internal.NotNull;
 import io.jsonwebtoken.*;
 import io.jsonwebtoken.impl.TextCodec;
+import lombok.Getter;
 import lombok.NonNull;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import ru.steamwallet.swcommon.dao.BuyerDao;
 import ru.steamwallet.swcommon.dao.SellerDao;
 import ru.steamwallet.swcommon.domain.Buyer;
 import ru.steamwallet.swcommon.domain.Seller;
-import ru.steamwallet.swcommon.exceptions.InvalidAccessToken;
 import ru.steamwallet.swcommon.exceptions.ResourceNotFoundException;
 import ru.steamwallet.swcommon.exceptions.UnAuthorized;
 
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
+import java.io.Serializable;
 import java.net.InetAddress;
 import java.net.UnknownHostException;
 import java.util.*;
@@ -79,8 +81,8 @@ public abstract class SessionController {
                     .setSigningKey(K64)
                     .parseClaimsJws(payload)
                     .getBody();
-            final int id = Optional.of((int)claims.get(USER_ID)).orElseThrow(UnAuthorized::new);
-            final Seller seller = sellerDao.get((long)id);
+            final Long id = Optional.of(Long.parseLong(claims.get(USER_ID).toString())).orElseThrow(UnAuthorized::new);
+            final Seller seller = sellerDao.get(id);
             if (seller == null) {
                 throw new ResourceNotFoundException("user_id", id);
             }
@@ -107,7 +109,7 @@ public abstract class SessionController {
                     .setSigningKey(K64)
                     .parseClaimsJws(payload)
                     .getBody();
-            final Long id = Optional.of((Long)claims.get(USER_ID)).orElseThrow(UnAuthorized::new);
+            final Long id = Optional.of(Long.parseLong(claims.get(USER_ID).toString())).orElseThrow(UnAuthorized::new);
             final Buyer buyer = buyerDao.get(id);
             if (buyer == null) {
                 throw new ResourceNotFoundException("user_id", id);
@@ -170,5 +172,25 @@ public abstract class SessionController {
 
     protected static boolean isSslRequest(final @NotNull HttpServletRequest request) {
         return request.getHeader("X-Real-IP") != null;
+    }
+
+    protected static class UserRequest implements Serializable {
+        @Getter
+        private String login;
+
+        @Getter
+        private String email;
+
+        @Getter
+        private String password;
+
+        @JsonCreator
+        public UserRequest(@JsonProperty("name") String login,
+                            @JsonProperty("email") String email,
+                            @JsonProperty("password") String password) {
+            this.login = login;
+            this.email = email;
+            this.password = password;
+        }
     }
 }
