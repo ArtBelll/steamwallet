@@ -1,7 +1,6 @@
 import {Component} from '@angular/core';
 import {SellerRequest} from "../../domain/request/sellerRequest";
 import { Location }                 from '@angular/common';
-
 import {AuthSellerService} from "../../services/auth-seller-service"
 
 @Component({
@@ -20,7 +19,7 @@ export class SignInComponent {
 
   seller: SellerRequest = new SellerRequest();
 
-  signIn():void {
+  signIn(): void {
     this.authSellerService.signIn(this.seller)
       .then(seller => {
         console.log(seller);

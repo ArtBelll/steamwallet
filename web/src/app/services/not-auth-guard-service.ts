@@ -2,16 +2,16 @@ import { Injectable }       from '@angular/core';
 import {
   CanActivate, Router
 }                           from '@angular/router';
-import { AuthSellerService }      from './auth-seller-service';
+import {UserService} from "./user-service";
 
 @Injectable()
 export class NotAuthGuard implements CanActivate {
-  constructor(private authSellerService: AuthSellerService, private router: Router) {}
+  constructor(private userService: UserService, private router: Router) {}
 
   private redirectUrl = "/";
 
   canActivate(): Promise<boolean> {
-    return this.authSellerService.checkLogin().then(e => {
+    return this.userService.checkSession().then(e => {
       if (e) {
         this.router.navigate([this.redirectUrl]);
         return false;
