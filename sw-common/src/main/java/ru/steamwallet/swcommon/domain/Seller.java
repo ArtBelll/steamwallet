@@ -25,6 +25,7 @@ public class Seller implements Serializable {
     @Getter @Setter
     private String login;
 
+    @JsonIgnore
     @Getter @Setter
     private String password;
 
@@ -37,6 +38,7 @@ public class Seller implements Serializable {
     @Getter @Setter
     private Date created = new Date();
 
+    @JsonIgnore
     @Getter @Setter
     @Column(name = "ip")
     private String ipAddress;

@@ -27,12 +27,14 @@ public class Buyer {
     @Getter @Setter
     private String email;
 
+    @JsonIgnore
     @Getter @Setter
     private String password;
 
     @Getter @Setter
     private Date created = new Date();
 
+    @JsonIgnore
     @Getter @Setter
     @Column(name = "ip")
     private String ipAddress;
