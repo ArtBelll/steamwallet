@@ -16,7 +16,7 @@ export class SignUpComponent {
 
   seller:SellerRequest = new SellerRequest();
 
-  singUp():void {
+  signUp():void {
     this.authSellerService.register(this.seller)
       .then(seller => console.log(seller));
   }
