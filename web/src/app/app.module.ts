@@ -10,6 +10,8 @@ import {SignUpComponent} from "./components/registration/sign-up.component";
 import {SignInComponent} from "./components/login/sign-in.component";
 import {NotAuthGuard} from "./services/not-auth-guard-service";
 import {UserService} from "./services/user-service";
+import {AuthBuyerService} from "./services/auth-buyer-service";
+import {CustomObservable} from "./services/custom-observable-service";
 
 @NgModule({
     imports: [
@@ -26,8 +28,10 @@ import {UserService} from "./services/user-service";
     ],
     providers: [
       AuthSellerService,
+      AuthBuyerService,
       NotAuthGuard,
-      UserService
+      UserService,
+      CustomObservable
     ],
     bootstrap: [AppComponent]
 })

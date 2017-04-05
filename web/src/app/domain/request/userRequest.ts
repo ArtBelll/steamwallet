@@ -1,4 +1,4 @@
-export class SellerRequest {
+export class UserRequest {
     login = '';
     email = '';
     password = '';

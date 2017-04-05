@@ -4,16 +4,16 @@ import {Headers, Http}  from "@angular/http";
 import 'rxjs/add/operator/map'
 import 'rxjs/add/operator/toPromise';
 
-import {Seller} from '../domain/seller';
 import {UserRequest} from '../domain/request/userRequest';
+import {Buyer} from "../domain/buyer";
 import {IUserAuth} from "./user-auth";
 
 @Injectable()
-export class AuthSellerService implements IUserAuth<Seller> {
+export class AuthBuyerService implements IUserAuth<Buyer> {
 
-  private urlRegister = 'api/v1/auth/seller/register';
-  private urlLogin = 'api/v1/auth/seller/login';
-  private urlLogout = 'api/v1/auth/seller/logout';
+  private urlRegister = 'api/v1/auth/buyer/register';
+  private urlLogin = 'api/v1/auth/buyer/login';
+  private urlLogout = 'api/v1/auth/buyer/logout';
 
   private headers = new Headers({'Content-Type': 'application/json'});
 
@@ -25,19 +25,19 @@ export class AuthSellerService implements IUserAuth<Seller> {
     return Promise.reject(error.message || error);
   }
 
-  register(userRequest:UserRequest):Promise<Seller> {
+  register(userRequest:UserRequest):Promise<Buyer> {
     return this.http
       .post(this.urlRegister, JSON.stringify(userRequest), {headers: this.headers})
       .toPromise()
-      .then(response => response.json() as Seller)
+      .then(response => response.json() as Buyer)
       .catch(this.handleError)
   }
 
-  signIn(userRequest:UserRequest):Promise<Seller> {
+  signIn(userRequest:UserRequest):Promise<Buyer> {
     return this.http
       .post(this.urlLogin, JSON.stringify(userRequest), {headers: this.headers})
       .toPromise()
-      .then(response => response.json() as Seller)
+      .then(response => response.json() as Buyer)
       .catch(this.handleError)
   }
 

@@ -9,7 +9,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var core_1 = require("@angular/core");
 var NavigationComponent = (function () {
     function NavigationComponent() {
-        this.userIsAuth = true;
+        this.isLoggedIn = true;
     }
     return NavigationComponent;
 }());
