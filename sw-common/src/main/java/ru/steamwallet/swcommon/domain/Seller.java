@@ -38,9 +38,6 @@ public class Seller implements Serializable {
     private Date created = new Date();
 
     @Getter @Setter
-    private Date lastAction = new Date();
-
-    @Getter @Setter
     @Column(name = "ip")
     private String ipAddress;
 

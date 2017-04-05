@@ -12,7 +12,9 @@ public interface BuyerDao {
 
     Buyer get(@NonNull Long id);
 
-    Buyer get(@NonNull String name);
+    Buyer getByName(@NonNull String name);
+
+    Buyer getByEmail(@NonNull String email);
 
     void update(@NonNull Buyer buyer);
 

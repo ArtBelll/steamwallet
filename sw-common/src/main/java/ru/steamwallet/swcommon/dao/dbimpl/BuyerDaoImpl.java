@@ -29,9 +29,17 @@ public class BuyerDaoImpl extends SessionFactoryHolder implements BuyerDao {
     }
 
     @Override
-    public Buyer get(@NonNull String name) {
+    public Buyer getByName(@NonNull String name) {
         Query query = getSession().createQuery("from Buyer u where u.login=:name");
         query.setParameter("name", name);
+        List results = query.list();
+        return !results.isEmpty() ? (Buyer) results.get(0) : null;
+    }
+
+    @Override
+    public Buyer getByEmail(@NonNull String email) {
+        Query query = getSession().createQuery("from Buyer u where u.email=:email");
+        query.setParameter("email", email);
         List results = query.list();
         return !results.isEmpty() ? (Buyer) results.get(0) : null;
     }
