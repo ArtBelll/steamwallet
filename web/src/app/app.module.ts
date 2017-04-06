@@ -13,29 +13,35 @@ import {UserService} from "./services/user-service";
 import {AuthBuyerService} from "./services/auth-buyer-service";
 import {CustomObservable} from "./services/custom-observable-service";
 import {MainPageComponent} from "./components/main-page/main-page.component";
+import {SellersListComponent} from "./components/sellers-list/sellers-list.component";
+import {SellersCardComponent} from "./components/seller-card/seller-card.component";
+import {SellerService} from "./services/seller-service";
 
 @NgModule({
-    imports: [
-        BrowserModule,
-        FormsModule,
-        HttpModule,
-        AppRoutingModule
-    ],
-    declarations: [
-        AppComponent,
-        NavigationComponent,
-        SignUpComponent,
-        SignInComponent,
-        MainPageComponent
-    ],
-    providers: [
-      AuthSellerService,
-      AuthBuyerService,
-      NotAuthGuard,
-      UserService,
-      CustomObservable
-    ],
-    bootstrap: [AppComponent]
+  imports: [
+    BrowserModule,
+    FormsModule,
+    HttpModule,
+    AppRoutingModule
+  ],
+  declarations: [
+    AppComponent,
+    NavigationComponent,
+    SignUpComponent,
+    SignInComponent,
+    MainPageComponent,
+    SellersListComponent,
+    SellersCardComponent
+  ],
+  providers: [
+    AuthSellerService,
+    AuthBuyerService,
+    NotAuthGuard,
+    UserService,
+    CustomObservable,
+    SellerService
+  ],
+  bootstrap: [AppComponent]
 })
 export class AppModule {
 }
