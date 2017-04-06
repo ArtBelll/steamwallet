@@ -12,6 +12,7 @@ import {NotAuthGuard} from "./services/not-auth-guard-service";
 import {UserService} from "./services/user-service";
 import {AuthBuyerService} from "./services/auth-buyer-service";
 import {CustomObservable} from "./services/custom-observable-service";
+import {MainPageComponent} from "./components/main-page/main-page.component";
 
 @NgModule({
     imports: [
@@ -24,7 +25,8 @@ import {CustomObservable} from "./services/custom-observable-service";
         AppComponent,
         NavigationComponent,
         SignUpComponent,
-        SignInComponent
+        SignInComponent,
+        MainPageComponent
     ],
     providers: [
       AuthSellerService,

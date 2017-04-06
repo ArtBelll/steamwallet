@@ -1,0 +1,49 @@
+.top-main-page {
+  position: relative;
+
+  .top-image {
+    .mask {
+      position: absolute;
+      top: 0;
+      left: 0;
+      background: rgba(0, 0, 0, 0.7);
+      width: 100%;
+      height: 615px;
+    }
+
+    img {
+      width: 100%;
+    }
+  }
+
+  .top-text {
+    position: absolute;
+    top: 50%;
+    left: 0;
+    transform: translateY(-50%);
+    width: 100%;
+    text-align: center;
+    color: white;
+    padding: 0 100px;
+
+    h1 {
+      font-size: 50px;
+    }
+
+    p {
+      font-size: 36px;
+    }
+
+    :last-child {
+
+    }
+  }
+}
+
+.content-main {
+  text-align: center;
+
+  h3 {
+    color: #839496;
+  }
+}

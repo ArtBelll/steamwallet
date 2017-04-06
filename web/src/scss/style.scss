@@ -1,2 +1,9 @@
+@import "variables";
 @import "bootswatch";
 @import "bootstrap";
+
+.sw-block {
+  margin: 20px 0;
+  background: $gray-dark;
+  padding: 20px;
+}
