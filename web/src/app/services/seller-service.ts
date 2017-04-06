@@ -20,7 +20,7 @@ export class SellerService {
     return Promise.reject(error.message || error);
   }
 
-  getAllSellers() {
+  getAllSellers(): Promise<Seller[]> {
     return this.http
       .get(this.urlAllSellers, {headers: this.headers})
       .toPromise()
@@ -28,7 +28,7 @@ export class SellerService {
       .catch(this.handleError)
   }
 
-  getSellerById(id: number) {
+  getSellerById(id: number): Promise<Seller> {
     const url = `${this.urlSellerById}/${id}`;
     return this.http
       .get(url, {headers: this.headers})

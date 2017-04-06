@@ -3,6 +3,7 @@ package ru.steamwallet.swcommon.dao.dbimpl;
 import lombok.NonNull;
 import org.hibernate.Query;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 import ru.steamwallet.swcommon.dao.SellerDao;
 import ru.steamwallet.swcommon.domain.Seller;
 
@@ -11,6 +12,7 @@ import java.util.List;
 /**
  * Created by Artur Belogur on 29.03.17.
  */
+@Transactional
 @Repository(value = "sellerDao")
 public class SellerDaoImpl extends SessionFactoryHolder implements SellerDao {
     @Override
