@@ -1,6 +1,12 @@
 {
-  "/api/*": {
+  "/api/v1/*": {
     "target": "http://localhost:8080",
+    "changeOrigin": true,
+    "secure": false,
+    "logLevel": "debug"
+  },
+  "/api/*": {
+    "target": "http://store.steampowered.com",
     "changeOrigin": true,
     "secure": false,
     "logLevel": "debug"

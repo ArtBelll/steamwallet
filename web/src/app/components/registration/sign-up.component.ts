@@ -2,12 +2,12 @@ import {Component, OnInit} from '@angular/core';
 import {UserRequest} from "../../domain/request/userRequest";
 import {Location}                 from '@angular/common';
 import {ActivatedRoute, Params}   from '@angular/router';
-import {AuthSellerService} from "../../services/auth-seller-service"
-import {AuthBuyerService} from "../../services/auth-buyer-service";
+import {AuthSellerService} from "../../services/auth-seller.service"
+import {AuthBuyerService} from "../../services/auth-buyer.service";
 import {IUserAuth} from "../../services/user-auth";
 import {Seller} from "../../domain/seller";
 import {Buyer} from "../../domain/buyer";
-import {CustomObservable} from "../../services/custom-observable-service";
+import {CustomObservable} from "../../services/custom-observable.service";
 
 @Component({
   selector: 'sing-up',

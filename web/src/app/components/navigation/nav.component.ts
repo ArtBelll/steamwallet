@@ -1,8 +1,8 @@
 import {Component, OnInit} from '@angular/core';
-import {AuthSellerService} from "../../services/auth-seller-service";
+import {AuthSellerService} from "../../services/auth-seller.service";
 import {Router} from "@angular/router";
-import {UserService} from "../../services/user-service";
-import {CustomObservable} from "../../services/custom-observable-service";
+import {UserService} from "../../services/user.service";
+import {CustomObservable} from "../../services/custom-observable.service";
 
 @Component({
   selector: 'navigation',

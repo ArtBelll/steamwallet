@@ -5,17 +5,19 @@ import {AppComponent}   from './components/main-component/app.component';
 import {HttpModule}     from '@angular/http';
 import {AppRoutingModule} from "./app-routing.module";
 import {NavigationComponent} from "./components/navigation/nav.component";
-import {AuthSellerService} from "./services/auth-seller-service";
+import {AuthSellerService} from "./services/auth-seller.service";
 import {SignUpComponent} from "./components/registration/sign-up.component";
 import {SignInComponent} from "./components/login/sign-in.component";
-import {NotAuthGuard} from "./services/not-auth-guard-service";
-import {UserService} from "./services/user-service";
-import {AuthBuyerService} from "./services/auth-buyer-service";
-import {CustomObservable} from "./services/custom-observable-service";
+import {NotAuthGuard} from "./services/not-auth-guard.service";
+import {UserService} from "./services/user.service";
+import {AuthBuyerService} from "./services/auth-buyer.service";
+import {CustomObservable} from "./services/custom-observable.service";
 import {MainPageComponent} from "./components/main-page/main-page.component";
 import {SellersListComponent} from "./components/sellers-list/sellers-list.component";
 import {SellersCardComponent} from "./components/seller-card/seller-card.component";
-import {SellerService} from "./services/seller-service";
+import {SellerService} from "./services/seller.service";
+import {GameInfoService} from "./services/game-info.service";
+import {GameInfoComponent} from "./components/game-info/game-info.component";
 
 @NgModule({
   imports: [
@@ -31,7 +33,8 @@ import {SellerService} from "./services/seller-service";
     SignInComponent,
     MainPageComponent,
     SellersListComponent,
-    SellersCardComponent
+    SellersCardComponent,
+    GameInfoComponent
   ],
   providers: [
     AuthSellerService,
@@ -39,7 +42,8 @@ import {SellerService} from "./services/seller-service";
     NotAuthGuard,
     UserService,
     CustomObservable,
-    SellerService
+    SellerService,
+    GameInfoService
   ],
   bootstrap: [AppComponent]
 })

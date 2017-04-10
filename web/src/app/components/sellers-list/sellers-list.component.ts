@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {Seller} from "../../domain/seller";
-import {SellerService} from "../../services/seller-service";
+import {SellerService} from "../../services/seller.service";
 
 @Component({
   selector: 'sellers-list',

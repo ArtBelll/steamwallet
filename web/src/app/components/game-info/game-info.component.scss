@@ -1,0 +1,11 @@
+.product-item {
+  overflow: hidden;
+
+  .product-name {
+    float: left;
+  }
+
+  .product-price {
+    float: right;
+  }
+}

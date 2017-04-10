@@ -1,0 +1,29 @@
+<div class="row">
+  <div class="col-md-12">
+    <label>URL игры:</label> <input (keyup.enter)="getGameInfo(appUrl.value); appUrl.value=''"  #appUrl/>
+    <button class="btn btn-primary" (click)="getGameInfo(appUrl.value); appUrl.value=''">Загрузить</button>
+  </div>
+</div>
+<div class="row">
+  <div class="col-md-12">
+    <div [hidden]="packages.length == 0" class="h3">Игра/Наборы</div>
+    <div *ngFor="let package of packages">
+      <div class="sw-block">
+        <div class="product-item">
+          <div class="product-name"><span>{{package.name}}</span></div>
+          <div class="product-price"><span>{{package.price}}</span></div>
+        </div>
+      </div>
+    </div>
+
+    <div [hidden]="dlcs.length == 0" class="h3">DLC</div>
+    <div *ngFor="let dlc of dlcs">
+      <div class="sw-block">
+        <div class="product-item">
+          <div class="product-name"><span>{{dlc.name}}</span></div>
+          <div class="product-price"><span>{{dlc.price}}</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
