@@ -1,6 +1,9 @@
 <div class="row">
-  <div class="col-md-12">
-    <label>URL игры:</label> <input (keyup.enter)="getGameInfo(appUrl.value); appUrl.value=''"  #appUrl/>
+  <div class="col-md-12 search-game">
+    <label>URL игры:</label>
+    <input class="form-control"
+           (keyup.enter)="getGameInfo(appUrl.value); appUrl.value=''" #appUrl
+           placeholder="URL"/>
     <button class="btn btn-primary" (click)="getGameInfo(appUrl.value); appUrl.value=''">Загрузить</button>
   </div>
 </div>
