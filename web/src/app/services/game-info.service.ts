@@ -20,7 +20,17 @@ export class GameInfoService {
 
   }
 
-  getGameInfo(id:number):Promise<Game> {
+  private parserUrlToId(url:string) {
+    var findSubString = "app/";
+    var startIndex = url.search(findSubString) + findSubString.length;
+    url = url.substr(startIndex);
+    var finishIndex = url.search('/');
+    return url.substr(0, finishIndex);
+  }
+
+  getGameInfo(gameUrl:string):Promise<Game> {
+    var id = this.parserUrlToId(gameUrl);
+    console.log(id);
     var url = `${this.urlGameInfo}${id}${this.languageParam}`;
     return this.http
       .get(url, {headers: this.headers})
@@ -44,7 +54,7 @@ export class GameInfoService {
         var json = response.json()[`${id}`]["data"];
         var packageInfo = new Package();
         packageInfo.name = json["name"];
-        packageInfo.price = json["price"]["final"];
+        packageInfo.price = json["price"]["final"] / 100;
         return packageInfo;
       })
   }
@@ -58,7 +68,7 @@ export class GameInfoService {
         var json = response.json()[`${id}`]["data"];
         var dlc = new Dlc();
         dlc.name = json["name"];
-        dlc.price = json["price_overview"]["final"];
+        dlc.price = json["price_overview"]["final"] / 100;
         return dlc;
       })
   }

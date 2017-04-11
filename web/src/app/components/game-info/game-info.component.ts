@@ -18,11 +18,11 @@ export class GameInfoComponent {
   constructor(private gameInfoService:GameInfoService) {
   }
 
-  getGameInfo(appId:number) {
+  getGameInfo(gameUrl:string) {
     this.packages = [];
     this.dlcs = [];
 
-    this.gameInfoService.getGameInfo(appId)
+    this.gameInfoService.getGameInfo(gameUrl)
       .then(game => {
 
         game.packages.forEach(packageId => {
