@@ -5894,5 +5894,9 @@ button.close {
   margin: 20px 0;
   background: #073642;
   padding: 20px; }
+  .sw-block.selectable:hover {
+    background: #839496;
+    color: black;
+    cursor: pointer; }
 
 /*# sourceMappingURL=styles.css.map */

@@ -6,4 +6,16 @@
   margin: 20px 0;
   background: $gray-dark;
   padding: 20px;
+
+  &.selectable:hover {
+    background: $gray;
+    color: black;
+    cursor: pointer;
+  }
+}
+
+.sw-block.selectable {
+  &:hover {
+
+  }
 }

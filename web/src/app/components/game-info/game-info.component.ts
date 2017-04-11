@@ -27,10 +27,7 @@ export class GameInfoComponent {
 
         game.packages.forEach(packageId => {
           this.gameInfoService.getPackageInfo(packageId)
-            .then(packageInfo => {
-              console.log(packageInfo);
-              this.packages.push(packageInfo);
-            });
+            .then(packageInfo => this.packages.push(packageInfo));
         });
 
         if (game.dlc) {

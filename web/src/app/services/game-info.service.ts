@@ -30,7 +30,6 @@ export class GameInfoService {
 
   getGameInfo(gameUrl:string):Promise<Game> {
     var id = this.parserUrlToId(gameUrl);
-    console.log(id);
     var url = `${this.urlGameInfo}${id}${this.languageParam}`;
     return this.http
       .get(url, {headers: this.headers})
