@@ -18,6 +18,7 @@ import {SellersCardComponent} from "./components/seller-card/seller-card.compone
 import {SellerService} from "./services/seller.service";
 import {GameInfoService} from "./services/game-info.service";
 import {GameInfoComponent} from "./components/game-info/game-info.component";
+import {PayPageComponent} from "./components/pay-page/pay-page.component";
 
 @NgModule({
   imports: [
@@ -34,7 +35,8 @@ import {GameInfoComponent} from "./components/game-info/game-info.component";
     MainPageComponent,
     SellersListComponent,
     SellersCardComponent,
-    GameInfoComponent
+    GameInfoComponent,
+    PayPageComponent
   ],
   providers: [
     AuthSellerService,

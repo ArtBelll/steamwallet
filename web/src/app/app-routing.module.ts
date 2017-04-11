@@ -6,17 +6,20 @@ import {NotAuthGuard} from "./services/not-auth-guard.service";
 import {MainPageComponent} from "./components/main-page/main-page.component";
 import {SellersListComponent} from "./components/sellers-list/sellers-list.component";
 import {GameInfoComponent} from "./components/game-info/game-info.component";
+import {PayPageComponent} from "./components/pay-page/pay-page.component";
 
 const routes:Routes = [
-    {path: '', redirectTo: 'home', pathMatch: 'full'},
-    {path: 'home', component: MainPageComponent},
-    {path: 'sign-up/:user', component: SignUpComponent, canActivate: [NotAuthGuard]},
-    {path: 'sign-in/:user', component: SignInComponent, canActivate: [NotAuthGuard]},
-    {path: 'sellers', component: SellersListComponent},
-    {path: 'test-game', component: GameInfoComponent}
+  {path: '', redirectTo: 'home', pathMatch: 'full'},
+  {path: 'home', component: MainPageComponent},
+  {path: 'sign-up/:user', component: SignUpComponent, canActivate: [NotAuthGuard]},
+  {path: 'sign-in/:user', component: SignInComponent, canActivate: [NotAuthGuard]},
+  {path: 'sellers', component: SellersListComponent},
+  {path: 'test-game', component: GameInfoComponent},
+  {path: 'pay', component: PayPageComponent}
 ];
 @NgModule({
-    imports: [RouterModule.forRoot(routes)],
-    exports: [RouterModule]
+  imports: [RouterModule.forRoot(routes)],
+  exports: [RouterModule]
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {
+}

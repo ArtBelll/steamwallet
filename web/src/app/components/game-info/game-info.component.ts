@@ -1,7 +1,6 @@
 import {Component} from '@angular/core';
 import {GameInfoService} from "../../services/game-info.service";
-import {Package} from "../../domain/game-info/package";
-import {Dlc} from "../../domain/game-info/dlc";
+import {Product} from "../../domain/game-info/product";
 
 @Component({
   selector: 'game-info',
@@ -11,9 +10,9 @@ import {Dlc} from "../../domain/game-info/dlc";
 
 export class GameInfoComponent {
 
-  private packages: Package[] = [];
+  private packages: Product[] = [];
 
-  private dlcs: Dlc[] = [];
+  private dlcs: Product[] = [];
 
   constructor(private gameInfoService:GameInfoService) {
   }

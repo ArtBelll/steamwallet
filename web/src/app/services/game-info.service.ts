@@ -4,8 +4,7 @@ import {Headers, Http}  from "@angular/http";
 import 'rxjs/add/operator/map'
 import 'rxjs/add/operator/toPromise';
 import {Game} from "../domain/game-info/game";
-import {Package} from "../domain/game-info/package";
-import {Dlc} from "../domain/game-info/dlc";
+import {Product} from "../domain/game-info/product";
 
 @Injectable()
 export class GameInfoService {
@@ -44,28 +43,28 @@ export class GameInfoService {
       });
   }
 
-  getPackageInfo(id:number):Promise<Package> {
+  getPackageInfo(id:number):Promise<Product> {
     var url = `${this.urlPackageInfo}${id}${this.languageParam}`;
     return this.http
       .get(url, {headers: this.headers})
       .toPromise()
       .then(response => {
         var json = response.json()[`${id}`]["data"];
-        var packageInfo = new Package();
+        var packageInfo = new Product();
         packageInfo.name = json["name"];
         packageInfo.price = json["price"]["final"] / 100;
         return packageInfo;
       })
   }
 
-  getDlcInfo(id:number):Promise<Dlc> {
+  getDlcInfo(id:number):Promise<Product> {
     var url = `${this.urlGameInfo}${id}${this.languageParam}`;
     return this.http
       .get(url, {headers: this.headers})
       .toPromise()
       .then(response => {
         var json = response.json()[`${id}`]["data"];
-        var dlc = new Dlc();
+        var dlc = new Product();
         dlc.name = json["name"];
         dlc.price = json["price_overview"]["final"] / 100;
         return dlc;
