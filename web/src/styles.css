@@ -5893,7 +5893,8 @@ button.close {
 .sw-block {
   margin: 20px 0;
   background: #073642;
-  padding: 20px; }
+  padding: 20px;
+  overflow: hidden; }
   .sw-block.selectable:hover {
     background: #839496;
     color: black;

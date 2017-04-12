@@ -1,0 +1,18 @@
+<div class="row">
+  <div class="col-md-8 col-md-offset-2 pay-page">
+    <div class="sw-block">
+      <div class="line-img">
+        <img [src]="product.image" alt="">
+      </div>
+      <div class="line">
+        <span class="h4">Продукт: </span><span>{{product.name}}</span>
+      </div>
+      <div class="line">
+        <span class="h4">Цена: </span><span>{{product.price}} руб.</span>
+      </div>
+      <div class="line">
+        <div class="btn btn-success">Купить</div><div (click)="goBack()" class="btn">Отмена</div>
+      </div>
+    </div>
+  </div>
+</div>

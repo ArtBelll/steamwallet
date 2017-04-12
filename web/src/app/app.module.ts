@@ -19,6 +19,7 @@ import {SellerService} from "./services/seller.service";
 import {GameInfoService} from "./services/game-info.service";
 import {GameInfoComponent} from "./components/game-info/game-info.component";
 import {PayPageComponent} from "./components/pay-page/pay-page.component";
+import {BuyService} from "./services/buy.service";
 
 @NgModule({
   imports: [
@@ -45,7 +46,8 @@ import {PayPageComponent} from "./components/pay-page/pay-page.component";
     UserService,
     CustomObservable,
     SellerService,
-    GameInfoService
+    GameInfoService,
+    BuyService
   ],
   bootstrap: [AppComponent]
 })

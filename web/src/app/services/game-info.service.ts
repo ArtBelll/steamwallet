@@ -39,6 +39,7 @@ export class GameInfoService {
         game.name = json["name"];
         game.packages = json["packages"];
         game.dlc = json["dlc"];
+        game.image = json["header_image"];
         return game;
       });
   }
@@ -53,6 +54,7 @@ export class GameInfoService {
         var packageInfo = new Product();
         packageInfo.name = json["name"];
         packageInfo.price = json["price"]["final"] / 100;
+        if(json["header_image"]) packageInfo.image = json["header_image"];
         return packageInfo;
       })
   }
@@ -67,6 +69,7 @@ export class GameInfoService {
         var dlc = new Product();
         dlc.name = json["name"];
         dlc.price = json["price_overview"]["final"] / 100;
+        dlc.image = json["header_image"];
         return dlc;
       })
   }

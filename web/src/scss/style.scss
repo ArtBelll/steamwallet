@@ -5,7 +5,8 @@
 .sw-block {
   margin: 20px 0;
   background: $gray-dark;
-  padding: 20px;
+  padding: 25px;
+  overflow: hidden;
 
   &.selectable:hover {
     background: $gray;
@@ -14,8 +15,3 @@
   }
 }
 
-.sw-block.selectable {
-  &:hover {
-
-  }
-}

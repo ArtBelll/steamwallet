@@ -11,7 +11,7 @@
   <div class="col-md-12">
     <div [hidden]="packages.length == 0" class="h3">Игра/Наборы</div>
     <div *ngFor="let package of packages">
-      <div class="sw-block selectable">
+      <div class="sw-block selectable" (click)="toPayPage(package)">
         <div class="product-item">
           <div class="product-name"><span>{{package.name}}</span></div>
           <div class="product-price"><span>{{package.price}} руб.</span></div>
@@ -21,7 +21,7 @@
 
     <div [hidden]="dlcs.length == 0" class="h3">DLC</div>
     <div *ngFor="let dlc of dlcs">
-      <div class="sw-block selectable">
+      <div class="sw-block selectable" (click)="toPayPage(dlc)">
         <div class="product-item">
           <div class="product-name"><span>{{dlc.name}}</span></div>
           <div class="product-price"><span>{{dlc.price}} руб.</span></div>
