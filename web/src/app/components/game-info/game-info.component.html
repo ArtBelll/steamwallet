@@ -7,6 +7,12 @@
     <button class="btn btn-primary" (click)="getGameInfo(appUrl.value); appUrl.value=''">Загрузить</button>
   </div>
 </div>
+<div *ngIf="game" class="row">
+  <div class="col-md-12 header">
+    <h2>{{game.name}}</h2>
+    <img [src]="game.image">
+  </div>
+</div>
 <div class="row">
   <div class="col-md-12">
     <div [hidden]="packages.length == 0" class="h3">Игра/Наборы</div>

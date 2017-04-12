@@ -3,6 +3,7 @@ import {GameInfoService} from "../../services/game-info.service";
 import {Product} from "../../domain/game-info/product";
 import {BuyService} from "../../services/buy.service";
 import {Router} from "@angular/router";
+import {Game} from "../../domain/game-info/game";
 
 @Component({
   selector: 'game-info',
@@ -11,6 +12,8 @@ import {Router} from "@angular/router";
 })
 
 export class GameInfoComponent implements OnInit{
+
+  private game: Game;
 
   private packages:Product[] = [];
 
@@ -35,6 +38,7 @@ export class GameInfoComponent implements OnInit{
 
     this.gameInfoService.getGameInfo(gameUrl)
       .then(game => {
+        this.game = game;
 
         game.packages.forEach(packageId => {
           this.gameInfoService.getPackageInfo(packageId)

@@ -1,4 +1,4 @@
-import {Component} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {Location}                 from '@angular/common';
 import {Product} from "../../domain/game-info/product";
 import {BuyService} from "../../services/buy.service";
@@ -9,14 +9,20 @@ import {BuyService} from "../../services/buy.service";
   styleUrls: ['./pay-page.component.scss'],
 })
 
-export class PayPageComponent {
+export class PayPageComponent implements OnInit{
 
   private product:Product;
 
+  private seller:string;
+
   constructor(private buyService:BuyService,
               private location:Location) {
-    if (buyService.currentBuy.product) {
-      this.product = buyService.currentBuy.product;
+  }
+
+  ngOnInit():void {
+    if (this.buyService.currentBuy.product) {
+      this.product = this.buyService.currentBuy.product;
+      this.seller = this.buyService.currentBuy.seller.login;
     }
     //TODO: Handle error
     else {
