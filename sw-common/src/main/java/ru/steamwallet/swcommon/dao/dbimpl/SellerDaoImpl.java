@@ -46,10 +46,9 @@ public class SellerDaoImpl extends SessionFactoryHolder implements SellerDao {
     }
 
     @Override
-    public List<Seller> getAll() {
+    public List getAll() {
         Query query = getSession().createQuery("from Seller");
-        List results = query.list();
-        return !results.isEmpty() ? results : null;
+        return query.list();
     }
 
     @Override

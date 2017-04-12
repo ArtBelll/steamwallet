@@ -1,5 +1,7 @@
-import {Component, OnInit, Input} from '@angular/core';
+import {Component, Input} from '@angular/core';
 import {Seller} from "../../domain/seller";
+import {Router} from "@angular/router";
+import {BuyService} from "../../services/buy.service";
 
 @Component({
   selector: 'seller-card',
@@ -10,4 +12,13 @@ import {Seller} from "../../domain/seller";
 export class SellersCardComponent {
 
   @Input('seller') seller:Seller;
+
+  constructor(private buyService:BuyService,
+              private router:Router) {
+  }
+
+  selectSeller(seller:Seller) {
+    this.buyService.currentBuy.seller = seller;
+    this.router.navigate(['game-info']);
+  }
 }

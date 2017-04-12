@@ -14,18 +14,11 @@ export class SellersListComponent implements OnInit {
 
   private sellers:Seller[];
 
-  constructor(private sellerService:SellerService,
-              private buyService:BuyService,
-              private router:Router) {
+  constructor(private sellerService:SellerService) {
   }
 
   ngOnInit():void {
     this.sellerService.getAllSellers()
       .then(sellers => this.sellers = sellers);
-  }
-
-  selectSeller(seller:Seller) {
-    this.buyService.currentBuy.seller = seller;
-    this.router.navigate(['game-info']);
   }
 }

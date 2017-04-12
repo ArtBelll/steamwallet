@@ -5893,11 +5893,15 @@ button.close {
 .sw-block {
   margin: 20px 0;
   background: #073642;
-  padding: 20px;
+  padding: 25px;
   overflow: hidden; }
   .sw-block.selectable:hover {
     background: #839496;
     color: black;
     cursor: pointer; }
+  .sw-block.selectable-shadow:hover {
+    cursor: pointer;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+    transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1); }
 
 /*# sourceMappingURL=styles.css.map */

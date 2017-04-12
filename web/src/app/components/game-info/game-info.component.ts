@@ -33,6 +33,7 @@ export class GameInfoComponent implements OnInit{
   getGameInfo(gameUrl:string) {
     this.buyService.currentBuy.gameUrl = gameUrl;
 
+    this.game = undefined;
     this.packages = [];
     this.dlcs = [];
 

@@ -18,7 +18,7 @@ public interface SellerDao {
 
     Seller getByEmail(@NonNull String email);
 
-    List<Seller> getAll();
+    List getAll();
 
     void update(@NonNull Seller seller);
 

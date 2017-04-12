@@ -33,7 +33,13 @@ public class Seller implements Serializable {
     private String email;
 
     @Getter @Setter
+    private String description;
+
+    @Getter @Setter
     private Float reaction = -1f;
+
+    @Getter @Setter
+    private String comfortTime;
 
     @Getter @Setter
     private Date created = new Date();
