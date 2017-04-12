@@ -4,7 +4,7 @@ import {Seller} from "../../domain/seller";
 @Component({
   selector: 'seller-card',
   templateUrl: './seller-card.component.html',
-  styleUrls: ['./seller-card.component.css'],
+  styleUrls: ['./seller-card.component.scss'],
 })
 
 export class SellersCardComponent {

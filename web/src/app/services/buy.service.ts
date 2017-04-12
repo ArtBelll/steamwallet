@@ -10,6 +10,8 @@ export class BuyService {
   public currentBuy = new Buy();
 
   checkCurrentBuy():boolean {
-    return this.currentBuy.gameUrl && this.currentBuy.seller && this.currentBuy.product != undefined;
+    if (this.currentBuy.seller)
+      return true;
+    return false;
   }
 }

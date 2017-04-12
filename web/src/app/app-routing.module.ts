@@ -15,7 +15,7 @@ const routes:Routes = [
   {path: 'sign-up/:user', component: SignUpComponent, canActivate: [NotAuthGuard]},
   {path: 'sign-in/:user', component: SignInComponent, canActivate: [NotAuthGuard]},
   {path: 'sellers', component: SellersListComponent},
-  {path: 'test-game', component: GameInfoComponent},
+  {path: 'game-info', component: GameInfoComponent},
   {path: 'pay', component: PayPageComponent, canActivate: [BuyGuard]}
 ];
 @NgModule({
