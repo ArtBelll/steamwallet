@@ -1,5 +1,4 @@
-export class Seller {
-  id:number;
-  login:string;
-  email:string;
+export class Seller extends User{
+  comfortTime:string;
+  reaction:number;
 }

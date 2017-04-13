@@ -1,5 +1,3 @@
-export class Buyer {
-  id:number;
-  login:string;
-  email:string;
+export class Buyer extends User{
+
 }
