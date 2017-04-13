@@ -1,5 +1,8 @@
 package ru.steamwallet.swserver.controllers;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import lombok.Getter;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
 import org.springframework.transaction.annotation.Transactional;
@@ -15,6 +18,7 @@ import ru.steamwallet.swcommon.utility.PasswordHasher;
 import ru.steamwallet.swserver.controllers.core.SessionController;
 
 import javax.servlet.http.HttpServletRequest;
+import java.io.Serializable;
 
 /**
  * Created by Artur Belogur on 13.04.17.
@@ -105,5 +109,25 @@ public class AuthController extends SessionController {
         getSessionUser(request);
 
         return closeSession();
+    }
+
+    private static class UserRequest implements Serializable {
+        @Getter
+        private String login;
+
+        @Getter
+        private String email;
+
+        @Getter
+        private String password;
+
+        @JsonCreator
+        public UserRequest(@JsonProperty("name") String login,
+                           @JsonProperty("email") String email,
+                           @JsonProperty("password") String password) {
+            this.login = login;
+            this.email = email;
+            this.password = password;
+        }
     }
 }

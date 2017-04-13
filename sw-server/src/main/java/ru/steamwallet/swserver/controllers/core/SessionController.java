@@ -80,29 +80,6 @@ public abstract class SessionController {
                 .compact();
     }
 
-//    protected String setSessionSeller(final @NonNull Seller seller) {
-//        final Map<String, Object> claims = new HashMap<>();
-//        claims.put(USER_ID, seller.getId());
-//        return Jwts.builder()
-//                .setSubject(seller.getLogin())
-//                .setIssuedAt(new Date())
-//                .setClaims(claims)
-//                .signWith(SignatureAlgorithm.HS512, K64)
-//                .compact();
-//    }
-//
-//    protected String setSessionBuyer(final @NonNull Buyer buyer) {
-//        final Map<String, Object> claims = new HashMap<>();
-//        claims.put(USER_ID, buyer.getId());
-//        final String payload = Jwts.builder()
-//                .setSubject(buyer.getLogin())
-//                .setIssuedAt(new Date())
-//                .setClaims(claims)
-//                .signWith(SignatureAlgorithm.HS512, K64)
-//                .compact();
-//        return payload;
-//    }
-
     protected User getSessionUser(final @NotNull HttpServletRequest request) {
         final Cookie[] cookies = Optional.ofNullable(request.getCookies())
                 .orElseThrow(() -> new UnAuthorized("No cookies set"));
@@ -136,62 +113,6 @@ public abstract class SessionController {
             throw new UnAuthorized();
         }
     }
-
-//    protected Seller getSessionSeller(final @NotNull HttpServletRequest request) {
-//        final Cookie[] cookies = Optional.ofNullable(request.getCookies())
-//                .orElseThrow(() -> new UnAuthorized("No cookies set"));
-//        final String payload = Stream.of(cookies)
-//                .filter(c -> c.getName().equalsIgnoreCase(TOKEN_HEADER))
-//                .findFirst()
-//                .orElseThrow(() -> new UnAuthorized("There's no X-SteamWaller-Token cookie"))
-//                .getValue();
-//        try {
-//            final Claims claims = Jwts.parser()
-//                    .setSigningKey(K64)
-//                    .parseClaimsJws(payload)
-//                    .getBody();
-//            final Long id = Optional.of(Long.parseLong(claims.get(USER_ID).toString())).orElseThrow(UnAuthorized::new);
-//            final Seller seller = sellerDao.get(id);
-//            if (seller == null) {
-//                throw new ResourceNotFoundException("user_id", id);
-//            }
-//            return seller;
-//        } catch (ResourceNotFoundException e) {
-//            log.error("getSessionUser ResourceNotFoundException: {}", e);
-//            throw new UnAuthorized();
-//        } catch (ExpiredJwtException |UnsupportedJwtException|MalformedJwtException |SignatureException|IllegalArgumentException e) {
-//            log.error("getSessionUser parseClaimsJws failed: {}", e);
-//            throw new UnAuthorized();
-//        }
-//    }
-//
-//    protected Buyer getSessionBuyer(final @NotNull HttpServletRequest request) {
-//        final Cookie[] cookies = Optional.ofNullable(request.getCookies())
-//                .orElseThrow(() -> new UnAuthorized("No cookies set"));
-//        final String payload = Stream.of(cookies)
-//                .filter(c -> c.getName().equalsIgnoreCase(TOKEN_HEADER))
-//                .findFirst()
-//                .orElseThrow(() -> new UnAuthorized("There's no X-SteamWaller-Token cookie"))
-//                .getValue();
-//        try {
-//            final Claims claims = Jwts.parser()
-//                    .setSigningKey(K64)
-//                    .parseClaimsJws(payload)
-//                    .getBody();
-//            final Long id = Optional.of(Long.parseLong(claims.get(USER_ID).toString())).orElseThrow(UnAuthorized::new);
-//            final Buyer buyer = buyerDao.get(id);
-//            if (buyer == null) {
-//                throw new ResourceNotFoundException("user_id", id);
-//            }
-//            return buyer;
-//        } catch (ResourceNotFoundException e) {
-//            log.error("getSessionUser ResourceNotFoundException: {}", e);
-//            throw new UnAuthorized();
-//        } catch (ExpiredJwtException |UnsupportedJwtException|MalformedJwtException |SignatureException|IllegalArgumentException e) {
-//            log.error("getSessionUser parseClaimsJws failed: {}", e);
-//            throw new UnAuthorized();
-//        }
-//    }
 
     protected static String getRequestIp(HttpServletRequest request) {
         InetAddress inetAddress;
@@ -241,25 +162,5 @@ public abstract class SessionController {
 
     protected static boolean isSslRequest(final @NotNull HttpServletRequest request) {
         return request.getHeader("X-Real-IP") != null;
-    }
-
-    protected static class UserRequest implements Serializable {
-        @Getter
-        private String login;
-
-        @Getter
-        private String email;
-
-        @Getter
-        private String password;
-
-        @JsonCreator
-        public UserRequest(@JsonProperty("name") String login,
-                           @JsonProperty("email") String email,
-                           @JsonProperty("password") String password) {
-            this.login = login;
-            this.email = email;
-            this.password = password;
-        }
     }
 }
