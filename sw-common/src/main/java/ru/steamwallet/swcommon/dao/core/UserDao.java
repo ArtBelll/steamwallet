@@ -3,8 +3,6 @@ package ru.steamwallet.swcommon.dao.core;
 import lombok.NonNull;
 import ru.steamwallet.swcommon.domain.User;
 
-import java.util.List;
-
 /**
  * Created by Artur Belogur on 13.04.17.
  */

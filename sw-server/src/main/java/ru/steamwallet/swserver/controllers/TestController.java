@@ -14,6 +14,6 @@ public class TestController {
 
     @RequestMapping(value = "test", method = RequestMethod.GET)
     public ResponseEntity<?> testServer() {
-        return new ResponseEntity<String>("Hello", HttpStatus.OK);
+        return new ResponseEntity<>("Hello", HttpStatus.OK);
     }
 }

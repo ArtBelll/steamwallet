@@ -3,12 +3,13 @@ package ru.steamwallet.swserver.controllers;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
 import ru.steamwallet.swcommon.dao.core.UserDao;
-import ru.steamwallet.swcommon.domain.Seller;
 import ru.steamwallet.swcommon.domain.User;
 import ru.steamwallet.swcommon.exceptions.AlreadyRegistered;
 import ru.steamwallet.swcommon.exceptions.BadRequest;
+import ru.steamwallet.swcommon.exceptions.UserNotExists;
 import ru.steamwallet.swcommon.utility.EmailValidator;
 import ru.steamwallet.swcommon.utility.PasswordHasher;
 import ru.steamwallet.swserver.controllers.core.SessionController;
@@ -38,7 +39,7 @@ public class AuthController extends SessionController {
             throw new BadRequest("Invalid email " + email);
         }
 
-        final UserDao userDao = getUserDaoImpl(role);
+        final UserDao<User> userDao = getUserDaoImpl(role);
 
         if(userDao.getByEmail(email) != null) {
             log.error("Email registration with already used email: {}", email);
@@ -60,5 +61,49 @@ public class AuthController extends SessionController {
         final String jwt = setSessionUser(user);
 
         return createdResponse(user, true, jwt, isSslRequest(request));
+    }
+
+    @RequestMapping(value = "auth/login", method = RequestMethod.POST)
+    public ResponseEntity<?> loginSeller(final HttpServletRequest request,
+                                         @RequestBody final UserRequest userRequest,
+                                         @RequestParam final int role) {
+        final String ip = getRequestIp(request);
+
+        log.info("Login userRequest procedure from {}:{}", ip, userRequest.getLogin());
+
+        if (StringUtils.isEmpty(userRequest.getEmail()) || StringUtils.isEmpty(userRequest.getPassword())) {
+            throw new BadRequest("Missed one or more request fields");
+        }
+
+        final UserDao<User> userDao = getUserDaoImpl(role);
+
+        final String email = userRequest.getEmail();
+        final User user = userDao.getByEmail(email);
+        if(user == null) {
+            throw new UserNotExists(email);
+        }
+        final String password = userRequest.getPassword();
+        if (!PasswordHasher.checkPassword(password, user.getPassword())) {
+            log.error("No password hash in db");
+            throw new BadRequest("Invalid password");
+        }
+
+        user.setIpAddress(ip);
+
+        final String jwt = setSessionUser(user);
+
+        userDao.update(user);
+
+        return createdResponse(user, false, jwt, isSslRequest(request));
+    }
+
+    @RequestMapping(value = "auth/logout", method = RequestMethod.GET)
+    public ResponseEntity<?> logoutSeller(final HttpServletRequest request) {
+        final String ip = getRequestIp(request);
+
+        log.info("Logout userRequest procedure from {}", ip);
+        getSessionUser(request);
+
+        return closeSession();
     }
 }
