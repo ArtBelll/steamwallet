@@ -1,57 +1,36 @@
-import {Component, OnInit} from '@angular/core';
+import {Component} from '@angular/core';
 import {UserRequest} from "../../domain/request/userRequest";
 import {Location}                 from '@angular/common';
-import {AuthSellerService} from "../../services/auth-seller.service"
-import {AuthBuyerService} from "../../services/auth-buyer.service";
-import {Buyer} from "../../domain/buyer";
-import {Seller} from "../../domain/seller";
-import {IUserAuth} from "../../services/user-auth";
-import {Params, ActivatedRoute} from "@angular/router";
 import {CustomObservable} from "../../services/custom-observable.service";
+import {AuthService} from "../../services/auth.service";
 
 @Component({
   selector: 'sing-in',
   templateUrl: './sign-in.component.html',
-  styleUrls: ['./sign-in.component.css'],
+  styleUrls: ['./sign-in.component.scss'],
 })
 
-export class SignInComponent implements OnInit{
+export class SignInComponent {
 
-  private authService:IUserAuth<Seller | Buyer>;
+  private role = 1;
 
-  private userRole = "";
-
-  constructor(private authSellerService:AuthSellerService,
-              private authBuyerService:AuthBuyerService,
-              private route:ActivatedRoute,
+  constructor(private authService:AuthService,
               private location:Location,
               private loggedService:CustomObservable) {
-  }
-
-  ngOnInit():void {
-    this.route.params
-      .map((params:Params) => params['user'])
-      .subscribe(user => {
-        if (user === "seller") {
-          this.userRole = 'продавцом';
-          this.authService = this.authSellerService;
-        }
-        else if (user === "buyer") {
-          this.userRole = 'покупателем';
-          this.authService = this.authBuyerService;
-        }
-        else this.location.back();
-      });
   }
 
   user:UserRequest = new UserRequest();
 
   signIn():void {
-    this.authService.signIn(this.user)
+    this.authService.signIn(this.user, this.role)
       .then(user => {
-        this.loggedService.emitChange(true);
         console.log(user);
+        this.loggedService.emitChange(true);
         this.location.back();
       });
+  }
+
+  changeRole():void {
+    this.role = this.role == 0 ? 1 : 0;
   }
 }

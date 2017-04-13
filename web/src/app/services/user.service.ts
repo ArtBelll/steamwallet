@@ -3,11 +3,10 @@ import { Headers, Http}  from "@angular/http";
 
 import 'rxjs/add/operator/map'
 import 'rxjs/add/operator/toPromise';
+import {RequestMapping} from "../request-mapping";
 
 @Injectable()
 export class UserService {
-
-  private urlCheckSession = 'api/v1/user/session';
 
   private headers = new Headers({'Content-Type': 'application/json'});
 
@@ -15,7 +14,7 @@ export class UserService {
 
   checkSession() {
     return this.http
-      .get(this.urlCheckSession, {headers: this.headers})
+      .get(RequestMapping.checkSession, {headers: this.headers})
       .map(response => response.ok)
       .toPromise()
   }

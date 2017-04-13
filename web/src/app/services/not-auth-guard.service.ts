@@ -8,7 +8,7 @@ import {UserService} from "./user.service";
 export class NotAuthGuard implements CanActivate {
   constructor(private userService: UserService, private router: Router) {}
 
-  private redirectUrl = "/";
+  private redirectUrl = "/home";
 
   canActivate(): Promise<boolean> {
     return this.userService.checkSession().then(e => {

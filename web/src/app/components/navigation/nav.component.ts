@@ -3,6 +3,7 @@ import {AuthSellerService} from "../../services/auth-seller.service";
 import {Router} from "@angular/router";
 import {UserService} from "../../services/user.service";
 import {CustomObservable} from "../../services/custom-observable.service";
+import {AuthService} from "../../services/auth.service";
 
 @Component({
   selector: 'navigation',
@@ -14,7 +15,7 @@ export class NavigationComponent implements OnInit {
 
   isLoggedIn:boolean;
 
-  constructor(private authSellerService:AuthSellerService,
+  constructor(private authService:AuthService,
               private userService:UserService,
               private loggedService:CustomObservable,
               private route:Router) {
@@ -28,10 +29,9 @@ export class NavigationComponent implements OnInit {
   }
 
   logOut():void {
-    this.authSellerService.logOut()
-      .then(e => {
+    this.authService.logOut()
+      .then(() => {
         this.isLoggedIn = false;
-        this.route.navigate(['']);
       });
   }
 }

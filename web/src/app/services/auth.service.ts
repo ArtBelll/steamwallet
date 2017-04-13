@@ -1,19 +1,15 @@
 import {Injectable} from '@angular/core';
 import {Headers, Http}  from "@angular/http";
 
-import 'rxjs/add/operator/map'
 import 'rxjs/add/operator/toPromise';
 
 import {Seller} from '../domain/seller';
 import {UserRequest} from '../domain/request/userRequest';
-import {IUserAuth} from "./user-auth";
+import {RequestMapping} from "../request-mapping";
+import {User} from "../domain/core/user";
 
 @Injectable()
-export class AuthSellerService implements IUserAuth<Seller> {
-
-  private urlRegister = 'api/v1/auth/seller/register';
-  private urlLogin = 'api/v1/auth/seller/login';
-  private urlLogout = 'api/v1/auth/seller/logout';
+export class AuthService {
 
   private headers = new Headers({'Content-Type': 'application/json'});
 
@@ -25,25 +21,27 @@ export class AuthSellerService implements IUserAuth<Seller> {
     return Promise.reject(error.message || error);
   }
 
-  register(userRequest:UserRequest):Promise<Seller> {
+  register(userRequest:UserRequest, role:number):Promise<Seller> {
+    let url = RequestMapping.register.replace('{0}', role.toString());
     return this.http
-      .post(this.urlRegister, JSON.stringify(userRequest), {headers: this.headers})
+      .post(url, JSON.stringify(userRequest), {headers: this.headers})
       .toPromise()
-      .then(response => response.json() as Seller)
+      .then(response => response.json() as User)
       .catch(this.handleError)
   }
 
-  signIn(userRequest:UserRequest):Promise<Seller> {
+  signIn(userRequest:UserRequest, role:number):Promise<Seller> {
+    let url = RequestMapping.login.replace('{0}', role.toString());
     return this.http
-      .post(this.urlLogin, JSON.stringify(userRequest), {headers: this.headers})
+      .post(url, JSON.stringify(userRequest), {headers: this.headers})
       .toPromise()
-      .then(response => response.json() as Seller)
+      .then(response => response.json() as User)
       .catch(this.handleError)
   }
 
   logOut():Promise<any> {
     return this.http
-      .get(this.urlLogout, {headers: this.headers})
+      .get(RequestMapping.logout, {headers: this.headers})
       .toPromise()
       .catch(this.handleError)
   }

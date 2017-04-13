@@ -12,8 +12,8 @@ import {BuyGuard} from "./services/buy-guard.service";
 const routes:Routes = [
   {path: '', redirectTo: 'home', pathMatch: 'full'},
   {path: 'home', component: MainPageComponent},
-  {path: 'sign-up/:user', component: SignUpComponent, canActivate: [NotAuthGuard]},
-  {path: 'sign-in/:user', component: SignInComponent, canActivate: [NotAuthGuard]},
+  {path: 'sign-up', component: SignUpComponent, canActivate: [NotAuthGuard]},
+  {path: 'sign-in', component: SignInComponent, canActivate: [NotAuthGuard]},
   {path: 'sellers', component: SellersListComponent},
   {path: 'game-info', component: GameInfoComponent},
   {path: 'pay', component: PayPageComponent, canActivate: [BuyGuard]}

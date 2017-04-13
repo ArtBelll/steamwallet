@@ -17,25 +17,18 @@
 
       <div *ngIf="!isLoggedIn">
         <ul class="nav navbar-nav navbar-right">
-          <li class="dropdown">
-            <a class="dropdown-toggle" data-toggle="dropdown" href="#" id="sign-in">Войти<span class="caret"></span></a>
-            <ul class="dropdown-menu" aria-labelledby="sign-in">
-              <li><a [routerLink]="['/sign-in', 'seller']">Как продавец</a></li>
-              <li><a [routerLink]="['/sign-in', 'buyer']">Как покупатель</a></li>
-            </ul>
+          <li>
+            <a [routerLink]="['/sign-in']">Войти</a>
           </li>
-          <li class="dropdown">
-            <a class="dropdown-toggle" data-toggle="dropdown" href="#" id="sing-up">Регистрация<span class="caret"></span></a>
-            <ul class="dropdown-menu" aria-labelledby="sing-up">
-              <li><a [routerLink]="['/sign-up', 'seller']">Как продавец</a></li>
-              <li><a [routerLink]="['/sign-up', 'buyer']">Как покупатель</a></li>
-            </ul>
+          <li>
+            <a [routerLink]="['/sign-up']">Регистрация</a>
           </li>
         </ul>
       </div>
       <div *ngIf="isLoggedIn">
         <ul class="nav navbar-nav navbar-right">
-          <li><a (click)="logOut()" href="#">Выйти</a></li>
+          <li><a [routerLink]="['/profile']">Профиль</a></li>
+          <li><a (click)="logOut()" [routerLink]="['']">Выйти</a></li>
         </ul>
       </div>
     </div>
