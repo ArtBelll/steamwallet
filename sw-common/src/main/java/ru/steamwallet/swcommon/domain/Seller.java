@@ -15,22 +15,7 @@ import java.util.List;
  */
 @Entity
 @Table(name = "sellers")
-public class Seller implements Serializable {
-
-    @Getter @Setter
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id = -1;
-
-    @Getter @Setter
-    private String login;
-
-    @JsonIgnore
-    @Getter @Setter
-    private String password;
-
-    @Getter @Setter
-    private String email;
+public class Seller extends User {
 
     @Getter @Setter
     private String description;
@@ -40,17 +25,6 @@ public class Seller implements Serializable {
 
     @Getter @Setter
     private String comfortTime;
-
-    @Getter @Setter
-    private Date created = new Date();
-
-    @JsonIgnore
-    @Getter @Setter
-    @Column(name = "ip")
-    private String ipAddress;
-
-    @Getter @Setter
-    private boolean enable = true;
 
     @JsonIgnore
     @Getter @Setter

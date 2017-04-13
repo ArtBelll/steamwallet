@@ -14,33 +14,7 @@ import java.util.List;
  */
 @Entity
 @Table(name = "buyers")
-public class Buyer {
-
-    @Getter @Setter
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id = -1;
-
-    @Getter @Setter
-    private String login;
-
-    @Getter @Setter
-    private String email;
-
-    @JsonIgnore
-    @Getter @Setter
-    private String password;
-
-    @Getter @Setter
-    private Date created = new Date();
-
-    @JsonIgnore
-    @Getter @Setter
-    @Column(name = "ip")
-    private String ipAddress;
-
-    @Getter @Setter
-    private boolean enable = true;
+public class Buyer extends User {
 
     @JsonIgnore
     @Getter @Setter
