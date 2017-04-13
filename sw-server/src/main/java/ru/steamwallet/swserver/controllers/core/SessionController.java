@@ -14,8 +14,10 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import ru.steamwallet.swcommon.dao.BuyerDao;
 import ru.steamwallet.swcommon.dao.SellerDao;
+import ru.steamwallet.swcommon.dao.core.UserDao;
 import ru.steamwallet.swcommon.domain.Buyer;
 import ru.steamwallet.swcommon.domain.Seller;
+import ru.steamwallet.swcommon.domain.User;
 import ru.steamwallet.swcommon.exceptions.ResourceNotFoundException;
 import ru.steamwallet.swcommon.exceptions.UnAuthorized;
 
@@ -38,6 +40,9 @@ public abstract class SessionController {
 
     private static final String TOKEN_HEADER = "X-SteamWallet-Token";
     private static final String USER_ID = "user_id";
+    private static final String USER_ROLE = "user_role";
+    private static final int USER_SELLER = 0;
+    private static final int USER_BUYER = 1;
 
     @Autowired
     protected SellerDao sellerDao;
@@ -45,30 +50,60 @@ public abstract class SessionController {
     @Autowired
     protected BuyerDao buyerDao;
 
-    protected String setSessionSeller(final @NonNull Seller seller) {
+    protected UserDao getUserDaoImpl(int role) {
+        switch (role) {
+            case USER_SELLER: return sellerDao;
+
+            case USER_BUYER: return buyerDao;
+        }
+        return null;
+    }
+
+    protected User getUser(int role, String name, String email, String password) {
+        switch (role) {
+            case USER_SELLER: return new Seller(name, email, password);
+
+            case USER_BUYER: return new Buyer(name, email, password);
+        }
+        return null;
+    }
+
+    protected String setSessionUser(final @NonNull User user) {
         final Map<String, Object> claims = new HashMap<>();
-        claims.put(USER_ID, seller.getId());
+        claims.put(USER_ID, user.getId());
+        claims.put(USER_ROLE, user instanceof Seller ? 0 : 1);
         return Jwts.builder()
-                .setSubject(seller.getLogin())
+                .setSubject(user.getLogin())
                 .setIssuedAt(new Date())
                 .setClaims(claims)
                 .signWith(SignatureAlgorithm.HS512, K64)
                 .compact();
     }
 
-    protected String setSessionBuyer(final @NonNull Buyer buyer) {
-        final Map<String, Object> claims = new HashMap<>();
-        claims.put(USER_ID, buyer.getId());
-        final String payload = Jwts.builder()
-                .setSubject(buyer.getLogin())
-                .setIssuedAt(new Date())
-                .setClaims(claims)
-                .signWith(SignatureAlgorithm.HS512, K64)
-                .compact();
-        return payload;
-    }
+//    protected String setSessionSeller(final @NonNull Seller seller) {
+//        final Map<String, Object> claims = new HashMap<>();
+//        claims.put(USER_ID, seller.getId());
+//        return Jwts.builder()
+//                .setSubject(seller.getLogin())
+//                .setIssuedAt(new Date())
+//                .setClaims(claims)
+//                .signWith(SignatureAlgorithm.HS512, K64)
+//                .compact();
+//    }
+//
+//    protected String setSessionBuyer(final @NonNull Buyer buyer) {
+//        final Map<String, Object> claims = new HashMap<>();
+//        claims.put(USER_ID, buyer.getId());
+//        final String payload = Jwts.builder()
+//                .setSubject(buyer.getLogin())
+//                .setIssuedAt(new Date())
+//                .setClaims(claims)
+//                .signWith(SignatureAlgorithm.HS512, K64)
+//                .compact();
+//        return payload;
+//    }
 
-    protected Seller getSessionSeller(final @NotNull HttpServletRequest request) {
+    protected User getSessionUser(final @NotNull HttpServletRequest request) {
         final Cookie[] cookies = Optional.ofNullable(request.getCookies())
                 .orElseThrow(() -> new UnAuthorized("No cookies set"));
         final String payload = Stream.of(cookies)
@@ -82,47 +117,81 @@ public abstract class SessionController {
                     .parseClaimsJws(payload)
                     .getBody();
             final Long id = Optional.of(Long.parseLong(claims.get(USER_ID).toString())).orElseThrow(UnAuthorized::new);
-            final Seller seller = sellerDao.get(id);
-            if (seller == null) {
-                throw new ResourceNotFoundException("user_id", id);
+            final int role = Optional.of(Integer.parseInt(claims.get(USER_ROLE).toString())).orElseThrow(UnAuthorized::new);
+            User user = null;
+            if (role == 0) {
+                user = sellerDao.get(id);
+            } else if (role == 1) {
+                user = buyerDao.get(id);
             }
-            return seller;
+            if (user == null) {
+                throw new ResourceNotFoundException("user_id or user_role", id);
+            }
+            return user;
         } catch (ResourceNotFoundException e) {
             log.error("getSessionUser ResourceNotFoundException: {}", e);
             throw new UnAuthorized();
-        } catch (ExpiredJwtException |UnsupportedJwtException|MalformedJwtException |SignatureException|IllegalArgumentException e) {
+        } catch (ExpiredJwtException | UnsupportedJwtException | MalformedJwtException | SignatureException | IllegalArgumentException e) {
             log.error("getSessionUser parseClaimsJws failed: {}", e);
             throw new UnAuthorized();
         }
     }
 
-    protected Buyer getSessionBuyer(final @NotNull HttpServletRequest request) {
-        final Cookie[] cookies = Optional.ofNullable(request.getCookies())
-                .orElseThrow(() -> new UnAuthorized("No cookies set"));
-        final String payload = Stream.of(cookies)
-                .filter(c -> c.getName().equalsIgnoreCase(TOKEN_HEADER))
-                .findFirst()
-                .orElseThrow(() -> new UnAuthorized("There's no X-SteamWaller-Token cookie"))
-                .getValue();
-        try {
-            final Claims claims = Jwts.parser()
-                    .setSigningKey(K64)
-                    .parseClaimsJws(payload)
-                    .getBody();
-            final Long id = Optional.of(Long.parseLong(claims.get(USER_ID).toString())).orElseThrow(UnAuthorized::new);
-            final Buyer buyer = buyerDao.get(id);
-            if (buyer == null) {
-                throw new ResourceNotFoundException("user_id", id);
-            }
-            return buyer;
-        } catch (ResourceNotFoundException e) {
-            log.error("getSessionUser ResourceNotFoundException: {}", e);
-            throw new UnAuthorized();
-        } catch (ExpiredJwtException |UnsupportedJwtException|MalformedJwtException |SignatureException|IllegalArgumentException e) {
-            log.error("getSessionUser parseClaimsJws failed: {}", e);
-            throw new UnAuthorized();
-        }
-    }
+//    protected Seller getSessionSeller(final @NotNull HttpServletRequest request) {
+//        final Cookie[] cookies = Optional.ofNullable(request.getCookies())
+//                .orElseThrow(() -> new UnAuthorized("No cookies set"));
+//        final String payload = Stream.of(cookies)
+//                .filter(c -> c.getName().equalsIgnoreCase(TOKEN_HEADER))
+//                .findFirst()
+//                .orElseThrow(() -> new UnAuthorized("There's no X-SteamWaller-Token cookie"))
+//                .getValue();
+//        try {
+//            final Claims claims = Jwts.parser()
+//                    .setSigningKey(K64)
+//                    .parseClaimsJws(payload)
+//                    .getBody();
+//            final Long id = Optional.of(Long.parseLong(claims.get(USER_ID).toString())).orElseThrow(UnAuthorized::new);
+//            final Seller seller = sellerDao.get(id);
+//            if (seller == null) {
+//                throw new ResourceNotFoundException("user_id", id);
+//            }
+//            return seller;
+//        } catch (ResourceNotFoundException e) {
+//            log.error("getSessionUser ResourceNotFoundException: {}", e);
+//            throw new UnAuthorized();
+//        } catch (ExpiredJwtException |UnsupportedJwtException|MalformedJwtException |SignatureException|IllegalArgumentException e) {
+//            log.error("getSessionUser parseClaimsJws failed: {}", e);
+//            throw new UnAuthorized();
+//        }
+//    }
+//
+//    protected Buyer getSessionBuyer(final @NotNull HttpServletRequest request) {
+//        final Cookie[] cookies = Optional.ofNullable(request.getCookies())
+//                .orElseThrow(() -> new UnAuthorized("No cookies set"));
+//        final String payload = Stream.of(cookies)
+//                .filter(c -> c.getName().equalsIgnoreCase(TOKEN_HEADER))
+//                .findFirst()
+//                .orElseThrow(() -> new UnAuthorized("There's no X-SteamWaller-Token cookie"))
+//                .getValue();
+//        try {
+//            final Claims claims = Jwts.parser()
+//                    .setSigningKey(K64)
+//                    .parseClaimsJws(payload)
+//                    .getBody();
+//            final Long id = Optional.of(Long.parseLong(claims.get(USER_ID).toString())).orElseThrow(UnAuthorized::new);
+//            final Buyer buyer = buyerDao.get(id);
+//            if (buyer == null) {
+//                throw new ResourceNotFoundException("user_id", id);
+//            }
+//            return buyer;
+//        } catch (ResourceNotFoundException e) {
+//            log.error("getSessionUser ResourceNotFoundException: {}", e);
+//            throw new UnAuthorized();
+//        } catch (ExpiredJwtException |UnsupportedJwtException|MalformedJwtException |SignatureException|IllegalArgumentException e) {
+//            log.error("getSessionUser parseClaimsJws failed: {}", e);
+//            throw new UnAuthorized();
+//        }
+//    }
 
     protected static String getRequestIp(HttpServletRequest request) {
         InetAddress inetAddress;
@@ -159,9 +228,9 @@ public abstract class SessionController {
     private void setJwtToken(final HttpHeaders headers, final String jwt, final boolean ssl, int expire) {
         headers.add(HttpHeaders.SET_COOKIE,
                 TOKEN_HEADER + "=" + jwt +
-                "; Max-Age=" + Integer.toString(expire) +
-                (ssl ? "; Secure" : "; HttpOnly") +
-                "; Path=/api/v1/");
+                        "; Max-Age=" + Integer.toString(expire) +
+                        (ssl ? "; Secure" : "; HttpOnly") +
+                        "; Path=/api/v1/");
     }
 
     protected ResponseEntity<?> closeSession() {
@@ -186,8 +255,8 @@ public abstract class SessionController {
 
         @JsonCreator
         public UserRequest(@JsonProperty("name") String login,
-                            @JsonProperty("email") String email,
-                            @JsonProperty("password") String password) {
+                           @JsonProperty("email") String email,
+                           @JsonProperty("password") String password) {
             this.login = login;
             this.email = email;
             this.password = password;
