@@ -9,13 +9,13 @@
     </div>
     <div class="col-md-6">
       <div class="h4">Статистика и информация</div>
-      <div class="line">
+      <div class="line line-border">
         <span>Среднее время реагирования (ч)</span>
         <span *ngIf="seller.reaction != -1; else elseReaction" class="right">{{seller.reaction}}</span>
-        <ng-template #elseReaction><span class="right">Недостаточно данных</span></ng-template>
+        <ng-template #elseReaction><span class="pull-right">Недостаточно данных</span></ng-template>
       </div>
-      <div *ngIf="seller.comfortTime" class="line">
-        <span>Удобное время (МСК)</span><span class="right">{{seller.comfortTime}}</span>
+      <div *ngIf="seller.comfortTime" class="line line-border">
+        <span>Удобное время (МСК)</span><span class="pull-right">{{seller.comfortTime}}</span>
       </div>
     </div>
   </div>

@@ -23,6 +23,7 @@ import {AuthService} from "./services/auth.service";
 import {SellerProfileComponent} from "./components/seller-profile/seller-profile.component";
 import {BuyerProfileComponent} from "./components/buyer-profile/buyer-profile.component";
 import {BuyerService} from "./services/buyer.service";
+import {PersonalDataComponent} from "./components/personal-data/personal-data.component";
 
 @NgModule({
   imports: [
@@ -42,7 +43,8 @@ import {BuyerService} from "./services/buyer.service";
     GameInfoComponent,
     PayPageComponent,
     SellerProfileComponent,
-    BuyerProfileComponent
+    BuyerProfileComponent,
+    PersonalDataComponent
   ],
   providers: [
     NotAuthGuard,

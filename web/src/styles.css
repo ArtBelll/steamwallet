@@ -5900,4 +5900,12 @@ button.close {
     color: black;
     cursor: pointer; }
 
+.line {
+  margin-bottom: 10px; }
+  .line:last-child {
+    margin-bottom: 0; }
+
+.line-border {
+  border-bottom: 1px solid rgba(131, 148, 150, 0.3); }
+
 /*# sourceMappingURL=styles.css.map */
