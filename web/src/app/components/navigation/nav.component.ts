@@ -29,10 +29,7 @@ export class NavigationComponent implements OnInit {
 
   gotoProfile() {
     this.userService.getRoleUser()
-      .then(role => {
-        console.log(role);
-        this.router.navigate(['/profile/' + role])
-      });
+      .then(role => this.router.navigate(['/profile/' + role]));
   }
 
   logOut():void {

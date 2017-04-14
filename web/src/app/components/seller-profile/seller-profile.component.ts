@@ -25,4 +25,8 @@ export class SellerProfileComponent implements OnInit {
       });
   }
 
+  save() {
+    this.sellerService.updateSeller(this.seller);
+  }
+
 }

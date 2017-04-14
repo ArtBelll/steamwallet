@@ -1,1 +1,16 @@
-<personal-data *ngIf="seller" [user]="seller"></personal-data>
+<div class="row">
+  <div class="col-md-6"><personal-data *ngIf="seller" [user]="seller"></personal-data></div>
+  <div class="col-md-6">
+    <h2>Дополнительные данные</h2>
+    <div *ngIf="seller" class="sw-block">
+      <div class="form-group">
+        <span>Удобное время (МСК)</span><input class="form-control" [(ngModel)]="seller.comfortTime" type="text">
+      </div>
+      <div class="form-group">
+        <span>О себе</span><textarea class="form-control" [(ngModel)]="seller.description"></textarea>
+      </div>
+      <div (click)="save()" class="btn btn-success pull-right">Сохранить</div>
+    </div>
+  </div>
+</div>
+

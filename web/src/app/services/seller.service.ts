@@ -4,6 +4,7 @@ import { Headers, Http}  from "@angular/http";
 import 'rxjs/add/operator/map'
 import 'rxjs/add/operator/toPromise';
 import {Seller} from "../domain/seller";
+import {RequestMapping} from "../request-mapping";
 
 @Injectable()
 export class SellerService {
@@ -35,5 +36,12 @@ export class SellerService {
       .toPromise()
       .then(response => response.json() as Seller)
       .catch(this.handleError)
+  }
+
+  updateSeller(seller: Seller) {
+    return this.http
+      .post(RequestMapping.updateAddInfoSeller, JSON.stringify(seller), {headers: this.headers})
+      .toPromise()
+      .catch(this.handleError);
   }
 }
