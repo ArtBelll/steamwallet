@@ -10,6 +10,7 @@ import {PayPageComponent} from "./components/pay-page/pay-page.component";
 import {BuyGuard} from "./services/buy-guard.service";
 import {SellerProfileComponent} from "./components/seller-profile/seller-profile.component";
 import {BuyerProfileComponent} from "./components/buyer-profile/buyer-profile.component";
+import {AuthGuard} from "./services/auth-guard.service";
 
 const routes:Routes = [
   {path: '', redirectTo: 'home', pathMatch: 'full'},
@@ -19,8 +20,8 @@ const routes:Routes = [
   {path: 'sellers', component: SellersListComponent},
   {path: 'game-info', component: GameInfoComponent},
   {path: 'pay', component: PayPageComponent, canActivate: [BuyGuard]},
-  {path: 'profile/seller', component: SellerProfileComponent, canActivate: []},
-  {path: 'profile/buyer', component: BuyerProfileComponent, canActivate: []}
+  {path: 'profile/seller', component: SellerProfileComponent, canActivate: [AuthGuard]},
+  {path: 'profile/buyer', component: BuyerProfileComponent, canActivate: [AuthGuard]}
 ];
 @NgModule({
   imports: [RouterModule.forRoot(routes)],

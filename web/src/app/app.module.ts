@@ -24,6 +24,7 @@ import {SellerProfileComponent} from "./components/seller-profile/seller-profile
 import {BuyerProfileComponent} from "./components/buyer-profile/buyer-profile.component";
 import {BuyerService} from "./services/buyer.service";
 import {PersonalDataComponent} from "./components/personal-data/personal-data.component";
+import {AuthGuard} from "./services/auth-guard.service";
 
 @NgModule({
   imports: [
@@ -55,7 +56,8 @@ import {PersonalDataComponent} from "./components/personal-data/personal-data.co
     GameInfoService,
     BuyService,
     BuyGuard,
-    AuthService
+    AuthService,
+    AuthGuard
   ],
   bootstrap: [AppComponent]
 })
