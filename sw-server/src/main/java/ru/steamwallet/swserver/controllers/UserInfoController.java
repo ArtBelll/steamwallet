@@ -1,5 +1,6 @@
 package ru.steamwallet.swserver.controllers;
 
+import lombok.Getter;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -10,7 +11,6 @@ import org.springframework.web.bind.annotation.RestController;
 import ru.steamwallet.swcommon.domain.Buyer;
 import ru.steamwallet.swcommon.domain.Seller;
 import ru.steamwallet.swcommon.domain.User;
-import ru.steamwallet.swcommon.exceptions.UnAuthorized;
 import ru.steamwallet.swserver.controllers.core.SessionController;
 
 import javax.servlet.http.HttpServletRequest;
@@ -24,8 +24,21 @@ import javax.servlet.http.HttpServletRequest;
 public class UserInfoController extends SessionController {
 
     @RequestMapping(value = "user/info", method = RequestMethod.GET)
-    public ResponseEntity<?> getSellerInfo(final HttpServletRequest request) {
+    public ResponseEntity<?> getUserInfo(final HttpServletRequest request) {
         final User user = getSessionUser(request);
         return new ResponseEntity<>(user, HttpStatus.OK);
+    }
+
+    @RequestMapping(value = "user/role", method = RequestMethod.GET)
+    public ResponseEntity<?> getUserRole(final HttpServletRequest request) {
+        final User user = getSessionUser(request);
+        ResponseRole role = new ResponseRole();
+        if (user instanceof Seller) role.name = "seller";
+        if (user instanceof Buyer) role.name = "buyer";
+        return new ResponseEntity<>(role, HttpStatus.OK);
+    }
+
+    private class ResponseRole {
+        @Getter String name;
     }
 }

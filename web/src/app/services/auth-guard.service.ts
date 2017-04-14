@@ -5,7 +5,7 @@ import {
 import {UserService} from "./user.service";
 
 @Injectable()
-export class NotAuthGuard implements CanActivate {
+export class AuthGuard implements CanActivate {
   constructor(private userService: UserService, private router: Router) {}
 
   private redirectUrl = "/home";
@@ -13,11 +13,11 @@ export class NotAuthGuard implements CanActivate {
   canActivate(): Promise<boolean> {
     return this.userService.getCurrentUser().then(e => {
       if (e) {
-        this.router.navigate([this.redirectUrl]);
-        return false;
+        return true;
       }
     }).catch(() => {
-      return Promise.resolve(true);
+      this.router.navigate([this.redirectUrl]);
+      return Promise.resolve(false);
     });
   }
 

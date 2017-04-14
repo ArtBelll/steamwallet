@@ -20,6 +20,9 @@ import {PayPageComponent} from "./components/pay-page/pay-page.component";
 import {BuyService} from "./services/buy.service";
 import {BuyGuard} from "./services/buy-guard.service";
 import {AuthService} from "./services/auth.service";
+import {SellerProfileComponent} from "./components/seller-profile/seller-profile.component";
+import {BuyerProfileComponent} from "./components/buyer-profile/buyer-profile.component";
+import {BuyerService} from "./services/buyer.service";
 
 @NgModule({
   imports: [
@@ -37,13 +40,16 @@ import {AuthService} from "./services/auth.service";
     SellersListComponent,
     SellersCardComponent,
     GameInfoComponent,
-    PayPageComponent
+    PayPageComponent,
+    SellerProfileComponent,
+    BuyerProfileComponent
   ],
   providers: [
     NotAuthGuard,
     UserService,
     CustomObservable,
     SellerService,
+    BuyerService,
     GameInfoService,
     BuyService,
     BuyGuard,

@@ -1,5 +1,4 @@
 import {Component, OnInit} from '@angular/core';
-import {AuthSellerService} from "../../services/auth-seller.service";
 import {Router} from "@angular/router";
 import {UserService} from "../../services/user.service";
 import {CustomObservable} from "../../services/custom-observable.service";
@@ -18,14 +17,22 @@ export class NavigationComponent implements OnInit {
   constructor(private authService:AuthService,
               private userService:UserService,
               private loggedService:CustomObservable,
-              private route:Router) {
+              private router:Router) {
     this.loggedService.changeEmitted.subscribe(bool => this.isLoggedIn = bool);
   }
 
   ngOnInit():void {
-    this.userService.checkSession()
+    this.userService.getCurrentUser()
       .then(e => this.isLoggedIn = true)
       .catch(e => this.isLoggedIn = false)
+  }
+
+  gotoProfile() {
+    this.userService.getRoleUser()
+      .then(role => {
+        console.log(role);
+        this.router.navigate(['/profile/' + role])
+      });
   }
 
   logOut():void {

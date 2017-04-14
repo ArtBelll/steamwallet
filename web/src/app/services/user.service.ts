@@ -4,6 +4,7 @@ import { Headers, Http}  from "@angular/http";
 import 'rxjs/add/operator/map'
 import 'rxjs/add/operator/toPromise';
 import {RequestMapping} from "../request-mapping";
+import {User} from "../domain/core/user";
 
 @Injectable()
 export class UserService {
@@ -12,10 +13,17 @@ export class UserService {
 
   constructor(private http: Http) { }
 
-  checkSession() {
+  getCurrentUser(): Promise<User> {
     return this.http
-      .get(RequestMapping.checkSession, {headers: this.headers})
-      .map(response => response.ok)
+      .get(RequestMapping.getCurrentUser, {headers: this.headers})
       .toPromise()
+      .then(response => response.json());
+  }
+
+  getRoleUser(): Promise<string> {
+    return this.http
+      .get(RequestMapping.getCurrentRole)
+      .toPromise()
+      .then(response => response.json()["name"]);
   }
 }
