@@ -1,5 +1,5 @@
 export class Product {
-  name:String;
+  name:string;
   price:number;
   image:string;
 }

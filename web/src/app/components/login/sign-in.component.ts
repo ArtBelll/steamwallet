@@ -1,5 +1,5 @@
 import {Component} from '@angular/core';
-import {UserRequest} from "../../domain/request/userRequest";
+import {UserRequest} from "../../domain/request/user-request";
 import {Location}                 from '@angular/common';
 import {CustomObservable} from "../../services/custom-observable.service";
 import {AuthService} from "../../services/auth.service";

@@ -14,9 +14,10 @@ export class PurchaseService {
 
   constructor(private http: Http) { }
 
-  createPurchase(purchase:PurchaseRequest) {
-    this.http.post(RequestMapping.createPurchase, JSON.stringify(purchase), {headers: this.headers})
+  createPurchase(purchase:PurchaseRequest): Promise<PurchaseRequest> {
+    return this.http.post(RequestMapping.createPurchase, JSON.stringify(purchase), {headers: this.headers})
       .toPromise()
+      .then(response => response.json() as PurchaseRequest)
       .catch(ErrorHandler.hendleError);
   }
 }

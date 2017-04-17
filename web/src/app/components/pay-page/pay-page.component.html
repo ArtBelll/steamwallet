@@ -5,7 +5,7 @@
         <img [src]="product.image" alt="">
       </div>
       <div class="line">
-        <span class="h4">Продавец: </span><span>{{seller}}</span>
+        <span class="h4">Продавец: </span><span>{{seller.login}}</span>
       </div>
       <div class="line">
         <span class="h4">Продукт: </span><span>{{product.name}}</span>
@@ -14,7 +14,7 @@
         <span class="h4">Цена: </span><span>{{product.price}} руб.</span>
       </div>
       <div class="line">
-        <div class="btn btn-success">Купить</div><div (click)="goBack()" class="btn">Отмена</div>
+        <div (click)="pay()" class="btn btn-success">Купить</div><div (click)="goBack()" class="btn">Отмена</div>
       </div>
     </div>
   </div>

@@ -18,8 +18,8 @@ const routes:Routes = [
   {path: 'sign-up', component: SignUpComponent, canActivate: [NotAuthGuard]},
   {path: 'sign-in', component: SignInComponent, canActivate: [NotAuthGuard]},
   {path: 'sellers', component: SellersListComponent},
-  {path: 'game-info', component: GameInfoComponent},
-  {path: 'pay', component: PayPageComponent, canActivate: [BuyGuard]},
+  {path: 'game-info', component: GameInfoComponent, canActivate: [AuthGuard]},
+  {path: 'pay', component: PayPageComponent, canActivate: [AuthGuard]},
   {path: 'profile/seller', component: SellerProfileComponent, canActivate: [AuthGuard]},
   {path: 'profile/buyer', component: BuyerProfileComponent, canActivate: [AuthGuard]}
 ];

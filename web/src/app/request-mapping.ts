@@ -16,4 +16,6 @@ export abstract class RequestMapping{
 
   //buyer
 
+  //purchase
+  static createPurchase = RequestMapping.commonUrl + "purchase/new";
 }
