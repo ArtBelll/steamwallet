@@ -122,7 +122,7 @@ public class AuthController extends SessionController {
         private String password;
 
         @JsonCreator
-        public UserRequest(@JsonProperty("name") String login,
+        public UserRequest(@JsonProperty("login") String login,
                            @JsonProperty("email") String email,
                            @JsonProperty("password") String password) {
             this.login = login;

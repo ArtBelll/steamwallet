@@ -37,7 +37,7 @@ public class SellerController extends SessionController {
     }
 
     @RequestMapping(value = "seller/update/add-info", method = RequestMethod.POST)
-    private ResponseEntity<?> updateSeller(HttpServletRequest request,
+    private ResponseEntity<?> updateAddInfo(HttpServletRequest request,
                                            @RequestBody RequestAddInfo addInfo) {
         Seller seller = (Seller) getSessionUser(request);
         seller.setComfortTime(addInfo.getComfortTime());
@@ -52,7 +52,7 @@ public class SellerController extends SessionController {
         return new ResponseEntity<>(sellers, HttpStatus.OK);
     }
 
-    private static class RequestAddInfo implements Serializable{
+    private static class RequestAddInfo implements Serializable {
         @Getter String comfortTime;
         @Getter String description;
 
