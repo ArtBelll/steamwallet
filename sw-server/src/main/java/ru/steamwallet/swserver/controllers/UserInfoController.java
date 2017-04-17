@@ -33,12 +33,12 @@ public class UserInfoController extends SessionController {
     public ResponseEntity<?> getUserRole(final HttpServletRequest request) {
         final User user = getSessionUser(request);
         ResponseRole role = new ResponseRole();
-        if (user instanceof Seller) role.name = "seller";
-        if (user instanceof Buyer) role.name = "buyer";
+        if (user instanceof Seller) role.role = 0;
+        if (user instanceof Buyer) role.role = 1;
         return new ResponseEntity<>(role, HttpStatus.OK);
     }
 
     private class ResponseRole {
-        @Getter String name;
+        @Getter int role;
     }
 }

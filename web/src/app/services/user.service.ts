@@ -20,10 +20,10 @@ export class UserService {
       .then(response => response.json());
   }
 
-  getRoleUser(): Promise<string> {
+  getRoleUser(): Promise<number> {
     return this.http
       .get(RequestMapping.getCurrentRole)
       .toPromise()
-      .then(response => response.json()["name"]);
+      .then(response => response.json()["role"]);
   }
 }

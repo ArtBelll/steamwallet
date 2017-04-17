@@ -25,7 +25,7 @@ export class SignInComponent {
     this.authService.signIn(this.user, this.role)
       .then(user => {
         console.log(user);
-        this.loggedService.emitChange(true);
+        this.loggedService.emitAuthChange(true);
         this.location.back();
       });
   }

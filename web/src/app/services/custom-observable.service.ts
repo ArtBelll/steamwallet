@@ -8,12 +8,12 @@ import {Subject} from "rxjs/Rx";
 @Injectable()
 export class CustomObservable {
 
-  private emitChangeSource = new Subject<any>();
+  private emitChangeAuth = new Subject<any>();
 
-  changeEmitted = this.emitChangeSource.asObservable();
+  changeAuthEmitted = this.emitChangeAuth.asObservable();
 
-  emitChange(change: any) {
-    this.emitChangeSource.next(change);
+  emitAuthChange(change: any) {
+    this.emitChangeAuth.next(change);
   }
 
 }
