@@ -5,6 +5,7 @@ import 'rxjs/add/operator/map'
 import 'rxjs/add/operator/toPromise';
 import {Game} from "../domain/game-info/game";
 import {Product} from "../domain/game-info/product";
+import {ErrorHandler} from "./utility/error-handler";
 
 @Injectable()
 export class GameInfoService {
@@ -41,7 +42,8 @@ export class GameInfoService {
         game.dlc = json["dlc"];
         game.image = json["header_image"];
         return game;
-      });
+      })
+      .catch(ErrorHandler.hendleError);
   }
 
   getPackageInfo(id:number):Promise<Product> {
@@ -57,6 +59,7 @@ export class GameInfoService {
         if(json["header_image"]) packageInfo.image = json["header_image"];
         return packageInfo;
       })
+      .catch(ErrorHandler.hendleError);
   }
 
   getDlcInfo(id:number):Promise<Product> {
@@ -72,5 +75,6 @@ export class GameInfoService {
         dlc.image = json["header_image"];
         return dlc;
       })
+      .catch(ErrorHandler.hendleError);
   }
 }

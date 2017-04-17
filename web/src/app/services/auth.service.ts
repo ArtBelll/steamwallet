@@ -4,7 +4,7 @@ import {Headers, Http}  from "@angular/http";
 import 'rxjs/add/operator/toPromise';
 
 import {Seller} from '../domain/seller';
-import {UserRequest} from '../domain/request/userRequest';
+import {UserRequest} from '../domain/request/user-request';
 import {RequestMapping} from "../request-mapping";
 import {User} from "../domain/core/user";
 

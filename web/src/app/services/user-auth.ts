@@ -1,4 +1,4 @@
-import {UserRequest} from "../domain/request/userRequest";
+import {UserRequest} from "../domain/request/user-request";
 
 export interface IUserAuth<T> {
 
