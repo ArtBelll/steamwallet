@@ -26,6 +26,7 @@ import {BuyerService} from "./services/buyer.service";
 import {PersonalDataComponent} from "./components/personal-data/personal-data.component";
 import {AuthGuard} from "./services/auth-guard.service";
 import {PurchaseService} from "./services/purchase.service";
+import {SellerPurchasesComponent} from "./components/seller-purchases/seller-purchases.component";
 
 @NgModule({
   imports: [
@@ -46,7 +47,8 @@ import {PurchaseService} from "./services/purchase.service";
     PayPageComponent,
     SellerProfileComponent,
     BuyerProfileComponent,
-    PersonalDataComponent
+    PersonalDataComponent,
+    SellerPurchasesComponent
   ],
   providers: [
     NotAuthGuard,

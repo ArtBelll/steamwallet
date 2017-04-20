@@ -12,7 +12,9 @@ export abstract class RequestMapping{
 
   //seller
   static getAllSellers = RequestMapping.commonUrl + "seller/all";
+  static getSellerById = RequestMapping.commonUrl + "seller/{0}";
   static updateAddInfoSeller = RequestMapping.commonUrl + "seller/update/add-info";
+  static getSellerPurchases = RequestMapping.commonUrl + "seller/purchases";
 
   //buyer
 

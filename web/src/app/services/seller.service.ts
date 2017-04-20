@@ -6,12 +6,10 @@ import 'rxjs/add/operator/toPromise';
 import {Seller} from "../domain/seller";
 import {RequestMapping} from "../request-mapping";
 import {ErrorHandler} from "./utility/error-handler";
+import {Order} from "../domain/order";
 
 @Injectable()
 export class SellerService {
-
-  private urlAllSellers = 'api/v1/seller/all';
-  private urlSellerById = 'api/v1/seller';
 
   private headers = new Headers({'Content-Type': 'application/json'});
 
@@ -19,14 +17,14 @@ export class SellerService {
 
   getAllSellers(): Promise<Seller[]> {
     return this.http
-      .get(this.urlAllSellers, {headers: this.headers})
+      .get(RequestMapping.getAllSellers, {headers: this.headers})
       .toPromise()
       .then(response => response.json() as Seller[])
       .catch(ErrorHandler.hendleError)
   }
 
   getSellerById(id: number): Promise<Seller> {
-    const url = `${this.urlSellerById}/${id}`;
+    let url = RequestMapping.register.replace('{0}', id.toString());
     return this.http
       .get(url, {headers: this.headers})
       .toPromise()
@@ -34,7 +32,15 @@ export class SellerService {
       .catch(ErrorHandler.hendleError)
   }
 
-  updateSeller(seller: Seller) {
+  getPurchases(): Promise<Order[]> {
+    return this.http
+      .get(RequestMapping.getSellerPurchases, {headers: this.headers})
+      .toPromise()
+      .then(response => response.json() as Order[])
+      .catch(ErrorHandler.hendleError)
+  }
+
+  updateAddInfoSeller(seller: Seller) {
     return this.http
       .post(RequestMapping.updateAddInfoSeller, JSON.stringify(seller), {headers: this.headers})
       .toPromise()

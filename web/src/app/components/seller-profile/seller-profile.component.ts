@@ -26,7 +26,7 @@ export class SellerProfileComponent implements OnInit {
   }
 
   save() {
-    this.sellerService.updateSeller(this.seller);
+    this.sellerService.updateAddInfoSeller(this.seller);
   }
 
 }
