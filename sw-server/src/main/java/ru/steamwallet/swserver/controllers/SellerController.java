@@ -32,13 +32,13 @@ public class SellerController extends SessionController {
     }
 
     @RequestMapping(value = "seller/{id}", method = RequestMethod.GET)
-    private ResponseEntity<?> getSellerById(@PathVariable("id") Long id) {
+    public ResponseEntity<?> getSellerById(@PathVariable("id") Long id) {
         Seller seller = sellerDao.get(id);
         return new ResponseEntity<>(seller, HttpStatus.OK);
     }
 
     @RequestMapping(value = "seller/update/add-info", method = RequestMethod.POST)
-    private ResponseEntity<?> updateAddInfo(HttpServletRequest request,
+    public ResponseEntity<?> updateAddInfo(HttpServletRequest request,
                                            @RequestBody RequestAddInfo addInfo) {
         Seller seller = (Seller) getSessionUser(request);
         seller.setComfortTime(addInfo.getComfortTime());
@@ -48,7 +48,7 @@ public class SellerController extends SessionController {
     }
 
     @RequestMapping(value = "seller/all", method = RequestMethod.GET)
-    private ResponseEntity<?> getAllSellers() {
+    public ResponseEntity<?> getAllSellers() {
         List<Seller> sellers = sellerDao.getAll();
         return new ResponseEntity<>(sellers, HttpStatus.OK);
     }
