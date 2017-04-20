@@ -27,6 +27,7 @@ import {PersonalDataComponent} from "./components/personal-data/personal-data.co
 import {AuthGuard} from "./services/auth-guard.service";
 import {PurchaseService} from "./services/purchase.service";
 import {SellerPurchasesComponent} from "./components/seller-purchases/seller-purchases.component";
+import {StatusService} from "./services/status.service";
 
 @NgModule({
   imports: [
@@ -61,7 +62,8 @@ import {SellerPurchasesComponent} from "./components/seller-purchases/seller-pur
     BuyGuard,
     AuthService,
     AuthGuard,
-    PurchaseService
+    PurchaseService,
+    StatusService
   ],
   bootstrap: [AppComponent]
 })

@@ -6,9 +6,10 @@ package ru.steamwallet.swcommon;
 public enum StatusBuy {
 
     NON_STATUS(-1),
-    PAYMANT(1),
+    PAYMENT(1),
     SEND_GIFT(2),
-    SUCCESSE(3);
+    SUCCESSE(3),
+    FAIL(4);
 
     private final int status;
 

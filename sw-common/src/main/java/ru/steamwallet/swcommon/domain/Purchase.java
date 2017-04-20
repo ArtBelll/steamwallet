@@ -61,7 +61,7 @@ public class Purchase {
         this.sum = sum;
         this.game = game;
         this.url = url;
-        this.status = StatusBuy.PAYMANT.getStatus();
+        this.status = StatusBuy.PAYMENT.getStatus();
         this.seller = seller;
         this.buyer = buyer;
     }
