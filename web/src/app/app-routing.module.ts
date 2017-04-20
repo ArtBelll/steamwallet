@@ -11,18 +11,20 @@ import {SellerProfileComponent} from "./components/seller-profile/seller-profile
 import {BuyerProfileComponent} from "./components/buyer-profile/buyer-profile.component";
 import {AuthGuard} from "./services/auth-guard.service";
 import {SellerPurchasesComponent} from "./components/seller-purchases/seller-purchases.component";
+import {BuyerGuard} from "./services/buyer-guard.service";
+import {SellerGuard} from "./services/seller-guard.service";
 
 const routes:Routes = [
   {path: '', redirectTo: 'home', pathMatch: 'full'},
   {path: 'home', component: MainPageComponent},
   {path: 'sign-up', component: SignUpComponent, canActivate: [NotAuthGuard]},
   {path: 'sign-in', component: SignInComponent, canActivate: [NotAuthGuard]},
-  {path: 'sellers', component: SellersListComponent},
+  {path: 'sellers', component: SellersListComponent, canActivate: [BuyerGuard]},
   {path: 'game-info', component: GameInfoComponent, canActivate: [AuthGuard]},
   {path: 'pay', component: PayPageComponent, canActivate: [AuthGuard]},
   {path: 'profile/seller', component: SellerProfileComponent, canActivate: [AuthGuard]},
   {path: 'profile/buyer', component: BuyerProfileComponent, canActivate: [AuthGuard]},
-  {path: 'seller/purchases', component: SellerPurchasesComponent, canActivate: [AuthGuard]}
+  {path: 'seller/purchases', component: SellerPurchasesComponent, canActivate: [SellerGuard]}
 ];
 @NgModule({
   imports: [RouterModule.forRoot(routes)],

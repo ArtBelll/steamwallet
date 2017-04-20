@@ -29,6 +29,8 @@ import {PurchaseService} from "./services/purchase.service";
 import {SellerPurchasesComponent} from "./components/seller-purchases/seller-purchases.component";
 import {StatusService} from "./services/status.service";
 import {PurchaseComponent} from "./components/purchase/purchase.component";
+import {SellerGuard} from "./services/seller-guard.service";
+import {BuyerGuard} from "./services/buyer-guard.service";
 
 @NgModule({
   imports: [
@@ -65,7 +67,9 @@ import {PurchaseComponent} from "./components/purchase/purchase.component";
     AuthService,
     AuthGuard,
     PurchaseService,
-    StatusService
+    StatusService,
+    BuyerGuard,
+    SellerGuard
   ],
   bootstrap: [AppComponent]
 })
