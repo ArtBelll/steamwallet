@@ -1,0 +1,15 @@
+<div class="h1">{{order.game}}</div>
+<div class="row">
+  <div class="col-md-3">
+    <span class="h4">Время начала</span><br><span>{{order.start | date: 'hh:mm:ss dd/MM'}}</span>
+  </div>
+  <div class="col-md-3">
+    <span class="h4">URL игры</span><br><a href="{{order.url}}" target="_blank">Ссылка</a>
+  </div>
+  <div class="col-md-3">
+    <span class="h4">Цена</span><br><span>{{order.sum}} рублей</span>
+  </div>
+  <div class="col-md-3">
+    <span class="h4">Статус</span><br><span>{{getStatus()}}</span>
+  </div>
+</div>

@@ -28,6 +28,7 @@ import {AuthGuard} from "./services/auth-guard.service";
 import {PurchaseService} from "./services/purchase.service";
 import {SellerPurchasesComponent} from "./components/seller-purchases/seller-purchases.component";
 import {StatusService} from "./services/status.service";
+import {PurchaseComponent} from "./components/purchase/purchase.component";
 
 @NgModule({
   imports: [
@@ -49,7 +50,8 @@ import {StatusService} from "./services/status.service";
     SellerProfileComponent,
     BuyerProfileComponent,
     PersonalDataComponent,
-    SellerPurchasesComponent
+    SellerPurchasesComponent,
+    PurchaseComponent
   ],
   providers: [
     NotAuthGuard,
