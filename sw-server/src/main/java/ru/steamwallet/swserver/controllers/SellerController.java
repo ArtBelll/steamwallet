@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Getter;
 import lombok.extern.slf4j.Slf4j;
+import org.hibernate.Hibernate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -50,6 +51,13 @@ public class SellerController extends SessionController {
     private ResponseEntity<?> getAllSellers() {
         List<Seller> sellers = sellerDao.getAll();
         return new ResponseEntity<>(sellers, HttpStatus.OK);
+    }
+
+    @RequestMapping(value = "seller/purchases", method = RequestMethod.GET)
+    public ResponseEntity<?> getAllPurchases(HttpServletRequest request) {
+        Seller seller = (Seller) getSessionUser(request);
+        Hibernate.initialize(seller.getPurchases());
+        return new ResponseEntity<>(seller.getPurchases(), HttpStatus.OK);
     }
 
     private static class RequestAddInfo implements Serializable {

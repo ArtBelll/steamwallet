@@ -10,5 +10,5 @@ import java.util.List;
  * Created by Artur Belogur on 29.03.17.
  */
 public interface SellerDao extends UserDao<Seller> {
-    List getAll();
+    List<Seller> getAll();
 }

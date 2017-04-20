@@ -27,7 +27,7 @@
       </div>
       <div *ngIf="isLoggedIn">
         <ul class="nav navbar-nav navbar-right">
-          <li *ngIf="isSeller"><a [routerLink]="['/seller/purchase']">Заказы</a></li>
+          <li *ngIf="isSeller"><a [routerLink]="['/seller/purchases']">Заказы</a></li>
           <li><a (click)="gotoProfile()">Профиль</a></li>
           <li><a (click)="logOut()">Выйти</a></li>
         </ul>

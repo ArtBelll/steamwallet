@@ -46,7 +46,8 @@ public class SellerDaoImpl extends SessionFactoryHolder implements SellerDao {
     }
 
     @Override
-    public List getAll() {
+    @SuppressWarnings("unchecked")
+    public List<Seller> getAll() {
         Query query = getSession().createQuery("from Seller");
         return query.list();
     }
