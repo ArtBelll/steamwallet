@@ -20,7 +20,7 @@ const routes:Routes = [
   {path: 'sign-up', component: SignUpComponent, canActivate: [NotAuthGuard]},
   {path: 'sign-in', component: SignInComponent, canActivate: [NotAuthGuard]},
   {path: 'sellers', component: SellersListComponent, canActivate: [BuyerGuard]},
-  {path: 'game-info', component: GameInfoComponent, canActivate: [AuthGuard]},
+  {path: 'game-info', component: GameInfoComponent, canActivate: [BuyerGuard]},
   {path: 'pay', component: PayPageComponent, canActivate: [AuthGuard]},
   {path: 'profile/seller', component: SellerProfileComponent, canActivate: [AuthGuard]},
   {path: 'profile/buyer', component: BuyerProfileComponent, canActivate: [AuthGuard]},
