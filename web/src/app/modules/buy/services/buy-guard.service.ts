@@ -7,7 +7,7 @@ export class BuyGuard implements CanActivate {
   constructor(private buyService:BuyService, private router:Router) {
   }
 
-  private redirectUrl = "/sellers";
+  private redirectUrl = "/buy";
 
   canActivate():boolean {
     if (this.buyService.checkCurrentBuy()) {
