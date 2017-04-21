@@ -1,0 +1,46 @@
+.nav {
+  font-size: 0;
+}
+
+.process {
+  display: inline-block;
+  position: relative;
+  background: #073642;
+  padding: 10px 10px 10px 30px;
+  font-size: 18px;
+  margin-left: 6px;
+  color: #839496;
+  pointer-events: none;
+
+  &.active {
+    background: #CB4B16;
+    color: #EEE8D5;
+
+    &:after {
+      border-left: 15px solid #CB4B16;
+    }
+  }
+
+  &:before {
+    display: block;
+    content: ' ';
+    position: absolute;
+    top: 0;
+    left: 0;
+    border-top: 23px solid transparent;
+    border-bottom: 23px solid transparent;
+    border-left: 15px solid #002B36;
+  }
+
+  &:after {
+    display: block;
+    content: ' ';
+    position: absolute;
+    top: 0;
+    right: -15px;
+    border-top: 23px solid transparent;
+    border-bottom: 23px solid transparent;
+    border-left: 15px solid #073642;
+    z-index: 1;
+  }
+}

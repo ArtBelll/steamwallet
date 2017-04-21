@@ -1,4 +1,5 @@
 import {Component, OnInit} from '@angular/core';
+import {Location} from '@angular/common';
 import {GameInfoService} from "../../services/game-info.service";
 import {Product} from "../../domain/game-info/product";
 import {BuyService} from "../../services/buy.service";
@@ -21,7 +22,8 @@ export class GameInfoComponent implements OnInit{
 
   constructor(private gameInfoService:GameInfoService,
               private buyService:BuyService,
-              private router: Router) {
+              private router: Router,
+              private location:Location) {
   }
 
   ngOnInit():void {
@@ -62,6 +64,10 @@ export class GameInfoComponent implements OnInit{
 
   toPayPage(selectProduct:Product) {
     this.buyService.currentBuy.product = selectProduct;
-    this.router.navigate(['pay']);
+    this.router.navigate(['buy/pay']);
+  }
+
+  goBack() {
+    this.location.back();
   }
 }

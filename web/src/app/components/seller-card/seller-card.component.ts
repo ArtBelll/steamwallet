@@ -19,6 +19,6 @@ export class SellersCardComponent {
 
   selectSeller(seller:Seller) {
     this.buyService.currentBuy.seller = seller;
-    this.router.navigate(['game-info']);
+    this.router.navigate(['buy/game-info']);
   }
 }

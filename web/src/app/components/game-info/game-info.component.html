@@ -5,6 +5,7 @@
            (keyup.enter)="getGameInfo(appUrl.value); appUrl.value=''" #appUrl
            placeholder="URL"/>
     <button class="btn btn-primary" (click)="getGameInfo(appUrl.value); appUrl.value=''">Загрузить</button>
+    <div (click)="goBack()" class="btn">Назад</div>
   </div>
 </div>
 <div *ngIf="game" class="row">
