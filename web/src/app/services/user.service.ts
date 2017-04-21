@@ -1,8 +1,9 @@
-import { Injectable } from '@angular/core';
-import { Headers, Http}  from "@angular/http";
+import {Injectable} from '@angular/core';
+import {Headers, Http} from "@angular/http";
 
 import 'rxjs/add/operator/map'
 import 'rxjs/add/operator/toPromise';
+
 import {RequestMapping} from "../request-mapping";
 import {User} from "../domain/core/user";
 

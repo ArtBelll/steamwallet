@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import {Headers, Http}  from "@angular/http";
+import {Headers, Http} from "@angular/http";
 
 import 'rxjs/add/operator/toPromise';
 
@@ -7,6 +7,7 @@ import {Seller} from '../domain/seller';
 import {UserRequest} from '../domain/request/user-request';
 import {RequestMapping} from "../request-mapping";
 import {User} from "../domain/core/user";
+import {ErrorHandler} from "./utility/error-handler";
 
 @Injectable()
 export class AuthService {
@@ -16,18 +17,13 @@ export class AuthService {
   constructor(private http:Http) {
   }
 
-  private handleError(error:any):Promise<any> {
-    console.error('An error occurred', error);
-    return Promise.reject(error.message || error);
-  }
-
   register(userRequest:UserRequest, role:number):Promise<Seller> {
     let url = RequestMapping.register.replace('{0}', role.toString());
     return this.http
       .post(url, JSON.stringify(userRequest), {headers: this.headers})
       .toPromise()
       .then(response => response.json() as User)
-      .catch(this.handleError)
+      .catch(ErrorHandler.hendleError)
   }
 
   signIn(userRequest:UserRequest, role:number):Promise<Seller> {
@@ -36,13 +32,13 @@ export class AuthService {
       .post(url, JSON.stringify(userRequest), {headers: this.headers})
       .toPromise()
       .then(response => response.json() as User)
-      .catch(this.handleError)
+      .catch(ErrorHandler.hendleError)
   }
 
   logOut():Promise<any> {
     return this.http
       .get(RequestMapping.logout, {headers: this.headers})
       .toPromise()
-      .catch(this.handleError)
+      .catch(ErrorHandler.hendleError)
   }
 }
