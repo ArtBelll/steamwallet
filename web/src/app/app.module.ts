@@ -7,7 +7,7 @@ import {AppRoutingModule} from "./app-routing.module";
 import {NavigationComponent} from "./components/navigation/nav.component";
 import {SignUpComponent} from "./components/registration/sign-up.component";
 import {SignInComponent} from "./components/login/sign-in.component";
-import {NotAuthGuard} from "./services/not-auth-guard.service";
+import {NotAuthGuard} from "./services/guard/not-auth-guard.service";
 import {UserService} from "./services/user.service";
 import {CustomObservable} from "./services/custom-observable.service";
 import {MainPageComponent} from "./components/main-page/main-page.component";
@@ -18,14 +18,14 @@ import {SellerProfileComponent} from "./components/seller-profile/seller-profile
 import {BuyerProfileComponent} from "./components/buyer-profile/buyer-profile.component";
 import {BuyerService} from "./services/buyer.service";
 import {PersonalDataComponent} from "./components/personal-data/personal-data.component";
-import {AuthGuard} from "./services/auth-guard.service";
+import {AuthGuard} from "./services/guard/auth-guard.service";
 import {PurchaseService} from "./services/purchase.service";
 import {SellerPurchasesComponent} from "./components/seller-purchases/seller-purchases.component";
 import {StatusService} from "./services/status.service";
 import {PurchaseComponent} from "./components/purchase/purchase.component";
-import {SellerGuard} from "./services/seller-guard.service";
+import {SellerGuard} from "./services/guard/seller-guard.service";
 import {BuyModule} from "./modules/buy/buy.module";
-import {BuyerGuard} from "./services/buyer-guard.service";
+import {BuyerGuard} from "./services/guard/buyer-guard.service";
 
 @NgModule({
   imports: [
