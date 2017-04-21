@@ -5,7 +5,7 @@ import 'rxjs/add/operator/map'
 import 'rxjs/add/operator/toPromise';
 import {RequestMapping} from "../request-mapping";
 import {PurchaseRequest} from "../domain/request/purchase-request";
-import {ErrorHandler} from "./utility/error-handler";
+import {ErrorHandler} from "../utility/error-handler";
 
 @Injectable()
 export class PurchaseService {

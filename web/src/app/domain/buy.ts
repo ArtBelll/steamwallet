@@ -1,5 +1,5 @@
 import {Seller} from "./seller";
-import {Product} from "./game-info/product";
+import {Product} from "../modules/buy/domain/game-info/product";
 
 export class Buy {
   seller:Seller;

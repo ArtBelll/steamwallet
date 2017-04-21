@@ -6,7 +6,7 @@ import 'rxjs/add/operator/toPromise';
 
 import {Seller} from "../domain/seller";
 import {RequestMapping} from "../request-mapping";
-import {ErrorHandler} from "./utility/error-handler";
+import {ErrorHandler} from "../utility/error-handler";
 import {Order} from "../domain/order";
 
 @Injectable()

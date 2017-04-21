@@ -4,7 +4,7 @@ import {Router} from "@angular/router";
 import {PurchaseService} from "../../../../services/purchase.service";
 import {BuyService} from "../../services/buy.service";
 import {PurchaseRequest} from "../../../../domain/request/purchase-request";
-import {Product} from "../../../../domain/game-info/product";
+import {Product} from "../../domain/game-info/product";
 import {Seller} from "../../../../domain/seller";
 
 @Component({

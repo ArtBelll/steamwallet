@@ -7,7 +7,7 @@ import {Seller} from '../domain/seller';
 import {UserRequest} from '../domain/request/user-request';
 import {RequestMapping} from "../request-mapping";
 import {User} from "../domain/core/user";
-import {ErrorHandler} from "./utility/error-handler";
+import {ErrorHandler} from "../utility/error-handler";
 
 @Injectable()
 export class AuthService {

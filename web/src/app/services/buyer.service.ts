@@ -5,7 +5,7 @@ import 'rxjs/add/operator/map'
 import 'rxjs/add/operator/toPromise';
 
 import {Seller} from "../domain/seller";
-import {ErrorHandler} from "./utility/error-handler";
+import {ErrorHandler} from "../utility/error-handler";
 
 @Injectable()
 export class BuyerService {
