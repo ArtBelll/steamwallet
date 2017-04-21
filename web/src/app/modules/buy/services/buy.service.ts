@@ -2,7 +2,7 @@ import {Injectable} from '@angular/core';
 
 import 'rxjs/add/operator/map'
 import 'rxjs/add/operator/toPromise';
-import {Buy} from "../domain/buy";
+import {Buy} from "../../../domain/buy";
 
 @Injectable()
 export class BuyService {

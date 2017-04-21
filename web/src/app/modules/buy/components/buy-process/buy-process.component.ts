@@ -1,5 +1,4 @@
 import {Component, OnInit} from '@angular/core';
-import {Buy} from "../../domain/buy";
 
 @Component({
   selector: 'buy-process',

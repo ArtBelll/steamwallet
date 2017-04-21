@@ -1,8 +1,6 @@
 import {Component, OnInit} from '@angular/core';
-import {Seller} from "../../domain/seller";
-import {SellerService} from "../../services/seller.service";
-import {BuyService} from "../../services/buy.service";
-import {Router} from "@angular/router";
+import {Seller} from "../../../../domain/seller";
+import {SellerService} from "../../../../services/seller.service";
 
 @Component({
   selector: 'sellers-list',

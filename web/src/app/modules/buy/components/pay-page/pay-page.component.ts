@@ -1,11 +1,11 @@
 import {Component, OnInit} from '@angular/core';
 import {Location}                 from '@angular/common';
-import {Product} from "../../domain/game-info/product";
-import {BuyService} from "../../services/buy.service";
-import {PurchaseService} from "../../services/purchase.service";
-import {PurchaseRequest} from "../../domain/request/purchase-request";
-import {Seller} from "../../domain/seller";
 import {Router} from "@angular/router";
+import {PurchaseService} from "../../../../services/purchase.service";
+import {BuyService} from "../../services/buy.service";
+import {PurchaseRequest} from "../../../../domain/request/purchase-request";
+import {Product} from "../../../../domain/game-info/product";
+import {Seller} from "../../../../domain/seller";
 
 @Component({
   selector: 'pay-page',

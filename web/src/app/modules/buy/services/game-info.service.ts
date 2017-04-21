@@ -3,9 +3,9 @@ import {Headers, Http}  from "@angular/http";
 
 import 'rxjs/add/operator/map'
 import 'rxjs/add/operator/toPromise';
-import {Game} from "../domain/game-info/game";
-import {Product} from "../domain/game-info/product";
-import {ErrorHandler} from "./utility/error-handler";
+import {Game} from "../../../domain/game-info/game";
+import {Product} from "../../../domain/game-info/product";
+import {ErrorHandler} from "../../../services/utility/error-handler";
 
 @Injectable()
 export class GameInfoService {

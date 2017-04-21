@@ -11,14 +11,8 @@ import {NotAuthGuard} from "./services/not-auth-guard.service";
 import {UserService} from "./services/user.service";
 import {CustomObservable} from "./services/custom-observable.service";
 import {MainPageComponent} from "./components/main-page/main-page.component";
-import {SellersListComponent} from "./components/sellers-list/sellers-list.component";
-import {SellersCardComponent} from "./components/seller-card/seller-card.component";
 import {SellerService} from "./services/seller.service";
-import {GameInfoService} from "./services/game-info.service";
-import {GameInfoComponent} from "./components/game-info/game-info.component";
-import {PayPageComponent} from "./components/pay-page/pay-page.component";
-import {BuyService} from "./services/buy.service";
-import {BuyGuard} from "./services/buy-guard.service";
+import {BuyService} from "./modules/buy/services/buy.service";
 import {AuthService} from "./services/auth.service";
 import {SellerProfileComponent} from "./components/seller-profile/seller-profile.component";
 import {BuyerProfileComponent} from "./components/buyer-profile/buyer-profile.component";
@@ -30,15 +24,16 @@ import {SellerPurchasesComponent} from "./components/seller-purchases/seller-pur
 import {StatusService} from "./services/status.service";
 import {PurchaseComponent} from "./components/purchase/purchase.component";
 import {SellerGuard} from "./services/seller-guard.service";
+import {BuyModule} from "./modules/buy/buy.module";
 import {BuyerGuard} from "./services/buyer-guard.service";
-import {BuyProcessComponent} from "./components/buy-process/buy-process.component";
 
 @NgModule({
   imports: [
     BrowserModule,
     FormsModule,
     HttpModule,
-    AppRoutingModule
+    AppRoutingModule,
+    BuyModule
   ],
   declarations: [
     AppComponent,
@@ -46,16 +41,11 @@ import {BuyProcessComponent} from "./components/buy-process/buy-process.componen
     SignUpComponent,
     SignInComponent,
     MainPageComponent,
-    SellersListComponent,
-    SellersCardComponent,
-    GameInfoComponent,
-    PayPageComponent,
     SellerProfileComponent,
     BuyerProfileComponent,
     PersonalDataComponent,
     SellerPurchasesComponent,
     PurchaseComponent,
-    BuyProcessComponent
   ],
   providers: [
     NotAuthGuard,
@@ -63,15 +53,13 @@ import {BuyProcessComponent} from "./components/buy-process/buy-process.componen
     CustomObservable,
     SellerService,
     BuyerService,
-    GameInfoService,
     BuyService,
-    BuyGuard,
     AuthService,
     AuthGuard,
     PurchaseService,
     StatusService,
-    BuyerGuard,
-    SellerGuard
+    SellerGuard,
+    BuyerGuard
   ],
   bootstrap: [AppComponent]
 })

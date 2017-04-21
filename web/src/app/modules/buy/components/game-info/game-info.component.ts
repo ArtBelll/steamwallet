@@ -1,10 +1,10 @@
 import {Component, OnInit} from '@angular/core';
 import {Location} from '@angular/common';
-import {GameInfoService} from "../../services/game-info.service";
-import {Product} from "../../domain/game-info/product";
-import {BuyService} from "../../services/buy.service";
 import {Router} from "@angular/router";
-import {Game} from "../../domain/game-info/game";
+import {Game} from "../../../../domain/game-info/game";
+import {Product} from "../../../../domain/game-info/product";
+import {BuyService} from "../../services/buy.service";
+import {GameInfoService} from "../../services/game-info.service";
 
 @Component({
   selector: 'game-info',

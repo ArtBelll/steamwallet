@@ -1,6 +1,6 @@
 import {Component, Input} from '@angular/core';
-import {Seller} from "../../domain/seller";
 import {Router} from "@angular/router";
+import {Seller} from "../../../../domain/seller";
 import {BuyService} from "../../services/buy.service";
 
 @Component({
