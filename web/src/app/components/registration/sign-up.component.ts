@@ -23,8 +23,7 @@ export class SignUpComponent {
 
   signUp():void {
     this.authService.register(this.user, this.role)
-      .then(user => {
-        console.log(user);
+      .then(() => {
         this.loggedService.emitAuthChange(true);
         this.location.back();
       });
