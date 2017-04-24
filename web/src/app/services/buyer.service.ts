@@ -22,7 +22,7 @@ export class BuyerService {
       .get(this.urlAllSellers, {headers: this.headers})
       .toPromise()
       .then(response => response.json() as Seller[])
-      .catch(ErrorHandler.hendleError)
+      .catch(ErrorHandler.handleError)
   }
 
   getSellerById(id: number): Promise<Seller> {
@@ -31,6 +31,6 @@ export class BuyerService {
       .get(url, {headers: this.headers})
       .toPromise()
       .then(response => response.json() as Seller)
-      .catch(ErrorHandler.hendleError)
+      .catch(ErrorHandler.handleError)
   }
 }

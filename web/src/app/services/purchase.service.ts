@@ -18,6 +18,6 @@ export class PurchaseService {
     return this.http.post(RequestMapping.createPurchase, JSON.stringify(purchase), {headers: this.headers})
       .toPromise()
       .then(response => response.json() as PurchaseRequest)
-      .catch(ErrorHandler.hendleError);
+      .catch(ErrorHandler.handleError);
   }
 }

@@ -23,7 +23,7 @@ export class AuthService {
       .post(url, JSON.stringify(userRequest), {headers: this.headers})
       .toPromise()
       .then(response => response.json() as User)
-      .catch(ErrorHandler.hendleError)
+      .catch(ErrorHandler.handleError)
   }
 
   signIn(userRequest:UserRequest, role:number):Promise<Seller> {
@@ -32,13 +32,13 @@ export class AuthService {
       .post(url, JSON.stringify(userRequest), {headers: this.headers})
       .toPromise()
       .then(response => response.json() as User)
-      .catch(ErrorHandler.hendleError)
+      .catch(ErrorHandler.handleError)
   }
 
   logOut():Promise<any> {
     return this.http
       .get(RequestMapping.logout, {headers: this.headers})
       .toPromise()
-      .catch(ErrorHandler.hendleError)
+      .catch(ErrorHandler.handleError)
   }
 }

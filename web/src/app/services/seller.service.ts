@@ -21,7 +21,7 @@ export class SellerService {
       .get(RequestMapping.getAllSellers, {headers: this.headers})
       .toPromise()
       .then(response => response.json() as Seller[])
-      .catch(ErrorHandler.hendleError)
+      .catch(ErrorHandler.handleError)
   }
 
   getSellerById(id: number): Promise<Seller> {
@@ -30,7 +30,7 @@ export class SellerService {
       .get(url, {headers: this.headers})
       .toPromise()
       .then(response => response.json() as Seller)
-      .catch(ErrorHandler.hendleError)
+      .catch(ErrorHandler.handleError)
   }
 
   getPurchases(): Promise<Order[]> {
@@ -38,13 +38,13 @@ export class SellerService {
       .get(RequestMapping.getSellerPurchases, {headers: this.headers})
       .toPromise()
       .then(response => response.json() as Order[])
-      .catch(ErrorHandler.hendleError)
+      .catch(ErrorHandler.handleError)
   }
 
   updateAddInfoSeller(seller: Seller) {
     return this.http
       .post(RequestMapping.updateAddInfoSeller, JSON.stringify(seller), {headers: this.headers})
       .toPromise()
-      .catch(ErrorHandler.hendleError);
+      .catch(ErrorHandler.handleError);
   }
 }

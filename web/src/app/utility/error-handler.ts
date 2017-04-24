@@ -1,7 +1,7 @@
 export class ErrorHandler {
 
-  static hendleError(error:any) {
+  static handleError(error:any) {
     console.error('An error occurred', error);
-    return Promise.reject(error.message || error);
+    return Promise.reject(error.json()['error']['index']);
   }
 }

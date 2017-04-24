@@ -43,7 +43,7 @@ export class GameInfoService {
         game.image = json["header_image"];
         return game;
       })
-      .catch(ErrorHandler.hendleError);
+      .catch(ErrorHandler.handleError);
   }
 
   getPackageInfo(id:number):Promise<Product> {
@@ -59,7 +59,7 @@ export class GameInfoService {
         if(json["header_image"]) packageInfo.image = json["header_image"];
         return packageInfo;
       })
-      .catch(ErrorHandler.hendleError);
+      .catch(ErrorHandler.handleError);
   }
 
   getDlcInfo(id:number):Promise<Product> {
@@ -75,6 +75,6 @@ export class GameInfoService {
         dlc.image = json["header_image"];
         return dlc;
       })
-      .catch(ErrorHandler.hendleError);
+      .catch(ErrorHandler.handleError);
   }
 }

@@ -19,6 +19,7 @@ import ru.steamwallet.swserver.controllers.core.SessionController;
 
 import javax.servlet.http.HttpServletRequest;
 import java.io.Serializable;
+import java.util.Optional;
 
 /**
  * Created by Artur Belogur on 13.04.17.
@@ -36,24 +37,28 @@ public class AuthController extends SessionController {
 
         log.info("User register procedure from {}", ip);
 
-        final String email = userRequest.getEmail();
-        final EmailValidator emailValidator = new EmailValidator();
-        if (!emailValidator.validate(email)) {
-            log.error("Registration with invalid email: {}", email);
-            throw new BadRequest("Invalid email " + email);
+        if (Optional.ofNullable(userRequest.getLogin()).orElse("").length() < 3) {
+            throw new BadRequest("Login is too short", 4);
         }
 
         final UserDao<User> userDao = getUserDaoImpl(role);
 
-        if(userDao.getByEmail(email) != null) {
-            log.error("Email registration with already used email: {}", email);
-            throw new AlreadyRegistered("Email " + email + " is already used in system");
-        }
-
         final String login = userRequest.getLogin();
         if(userDao.getByName(login) != null) {
             log.error("Email registration with already used login: {}", login);
-            throw new AlreadyRegistered("Name " + login + " is already used in system");
+            throw new AlreadyRegistered("Name " + login + " is already used in system", 3);
+        }
+
+        final String email = userRequest.getEmail();
+        final EmailValidator emailValidator = new EmailValidator();
+        if (!emailValidator.validate(email)) {
+            log.error("Registration with invalid email: {}", email);
+            throw new BadRequest("Invalid email " + email, 1);
+        }
+
+        if(userDao.getByEmail(email) != null) {
+            log.error("Email registration with already used email: {}", email);
+            throw new AlreadyRegistered("Email " + email + " is already used in system", 2);
         }
 
         final String password = PasswordHasher.hashPassword(userRequest.getPassword());
@@ -76,7 +81,7 @@ public class AuthController extends SessionController {
         log.info("Login userRequest procedure from {}:{}", ip, userRequest.getLogin());
 
         if (StringUtils.isEmpty(userRequest.getEmail()) || StringUtils.isEmpty(userRequest.getPassword())) {
-            throw new BadRequest("Missed one or more request fields");
+            throw new BadRequest("Missed one or more request fields", 1);
         }
 
         final UserDao<User> userDao = getUserDaoImpl(role);
@@ -89,7 +94,7 @@ public class AuthController extends SessionController {
         final String password = userRequest.getPassword();
         if (!PasswordHasher.checkPassword(password, user.getPassword())) {
             log.error("No password hash in db");
-            throw new BadRequest("Invalid password");
+            throw new BadRequest("Invalid password", 2);
         }
 
         user.setIpAddress(ip);

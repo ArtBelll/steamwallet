@@ -28,10 +28,18 @@ public class RestExceptionHandler extends ResponseEntityExceptionHandler {
         private int code;
         @Getter @Setter
         private String message;
+        @Getter @Setter
+        private int index;
 
         public Error(int code, final String message) {
             this.code = code;
             this.message = message;
+        }
+
+        public Error(int code, final String message, int index) {
+            this.code = code;
+            this.message = message;
+            this.index = index;
         }
     }
 
@@ -97,7 +105,7 @@ public class RestExceptionHandler extends ResponseEntityExceptionHandler {
         HttpHeaders headers = jsonHeaders();
 
         ErrorResponse error = new ErrorResponse(
-                new Error(400, ex.getMessage()),
+                new Error(400, ex.getMessage(), ex.getIndex()),
                 "ERR"
         );
 
@@ -109,8 +117,9 @@ public class RestExceptionHandler extends ResponseEntityExceptionHandler {
         HttpHeaders headers = jsonHeaders();
 
         final String message = ex.getMessage();
+        final int index = ex.getIndex();
         ErrorResponse error = new ErrorResponse(
-                new Error(400, StringUtils.isEmpty(message) ? "Bad request" : "Bad request: " + message),
+                new Error(400, StringUtils.isEmpty(message) ? "Bad request" : "Bad request: " + message, index),
                 "ERR"
         );
 

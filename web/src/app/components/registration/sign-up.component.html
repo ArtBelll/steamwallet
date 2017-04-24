@@ -3,17 +3,26 @@
     <h1>Регистрация</h1>
     <div class="sw-block">
       <div (keyup.enter)="signUp()" class="form">
-        <div class="form-group">
+        <div class="form-group" [class.has-error]="validation.isLoginError || validation.isLoginValidError">
           <label for="login">Логин:</label>
           <input [(ngModel)]="user.login" type="text" class="form-control" id="login" placeholder="Логин">
+          <span *ngIf="validation.isLoginError" class="help-block">Этот логин уже используется</span>
+          <span *ngIf="validation.isLoginValidError" class="help-block">Логин должен содержать минимум 3 символа</span>
         </div>
-        <div class="form-group">
+        <div class="form-group" [class.has-error]="validation.isEmailExistError || validation.isEmailValidError">
           <label for="email">Email адрес:</label>
           <input [(ngModel)]="user.email" type="email" class="form-control" id="email" placeholder="email">
+          <span *ngIf="validation.isEmailExistError" class="help-block">Этот логин уже используется</span>
+          <span *ngIf="validation.isEmailValidError" class="help-block">Некорректный email</span>
         </div>
-        <div class="form-group">
+        <div class="form-group" [class.has-error]="validation.isPasswordError">
           <label for="pwd">Пароль:</label>
           <input [(ngModel)]="user.password" type="password" class="form-control" id="pwd" placeholder="Пароль">
+          <span *ngIf="validation.isPasswordError" class="help-block">Пароли не совпадают</span>
+        </div>
+        <div class="form-group">
+          <label for="pwdConf">Пароль еще раз:</label>
+          <input [(ngModel)]="password" type="password" class="form-control" id="pwdConf" placeholder="Пароль еще раз">
         </div>
         <div class="form-group">
           <label class="is-seller" for="seller">Стать продавцом</label>
